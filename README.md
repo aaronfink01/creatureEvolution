@@ -5,7 +5,8 @@ Aaron's Indy Sci project studying simulated creatures evolving.
 [Markdown Reference](https://guides.github.com/features/mastering-markdown/)
 
 ## Goals / Questions
-What language / environment are we using?
+What are the pros and cons of each language we might use?
+What are the goals we want to achieve with this project overall?
 
 ## Currently Doing
 
