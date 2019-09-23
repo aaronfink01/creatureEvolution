@@ -11,9 +11,10 @@ What are the goals we want to achieve with this project overall?
 
 ## Ideas
 * [Greenfoot](http://www.greenfoot.org) Java critters on a grid 
-   * (Pros: get a grid for free) 
-   * (Cons: can we have tests? Do we want a grid? Or at least 3D space?)
---
+   * (Pros: get a grid for free)
+   * [Has article about TDD in Greenfoot](https://greenroom.greenfoot.org/files/740/original.pdf)
+   * (Cons: Do we want a grid? Or at least 3D space?)
+
 
 ## Currently Doing
 - [ ] designing tests
