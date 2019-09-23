@@ -3,6 +3,7 @@ Aaron's Indy Sci project studying simulated creatures evolving.
 
 ## References
 [Markdown Reference](https://guides.github.com/features/mastering-markdown/)
+
 [Google Talk on PolyWorld](https://www.youtube.com/watch?v=_m97_kL4ox0)
 
 ## Goals / Questions
