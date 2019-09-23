@@ -22,6 +22,6 @@ What are the goals we want to achieve with this project overall?
 ## Needs to be Done
 
 ## Already Finished
-Aaron needs to fill out a project sheet for Michelle.
+- [x] Aaron needs to fill out a project sheet for Michelle.
 
 ## Bug List
