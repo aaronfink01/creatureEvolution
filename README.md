@@ -10,7 +10,7 @@ What are the pros and cons of each language we might use?
 What are the goals we want to achieve with this project overall?
 
 ## Ideas
-* [Greenfoot](greenfoot.org) Java critters on a grid 
+* [Greenfoot](http://www.greenfoot.org) Java critters on a grid 
    * (Pros: get a grid for free) 
    * (Cons: can we have tests? Do we want a grid? Or at least 3D space?)
 --
