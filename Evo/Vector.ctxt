@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Vector
+comment0.text=\n\ Write\ a\ description\ of\ class\ Vector\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ September\ 25,\ 2019\n
+comment1.params=x\ y
+comment1.target=Vector(double,\ double)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Vector\n
+comment2.params=other
+comment2.target=void\ add(Vector)
+comment3.params=other
+comment3.target=void\ sub(Vector)
+comment4.params=scaler
+comment4.target=void\ mult(double)
+comment5.params=scaler
+comment5.target=void\ div(double)
+comment6.params=
+comment6.target=void\ normalize()
+comment7.params=
+comment7.target=double\ getMag()
+comment8.params=other
+comment8.target=double\ dist(Vector)
+numComments=9

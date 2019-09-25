@@ -1,7 +1,6 @@
 #BlueJ class context
 comment0.target=Agent
 comment0.text=\n\ Write\ a\ description\ of\ interface\ Agent\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ September\ 24,\ 2019\n
-comment1.params=y
-comment1.target=int\ sampleMethod(int)
-comment1.text=\n\ An\ example\ of\ a\ method\ header\ -\ replace\ this\ comment\ with\ your\ own\n\n\ @param\ \ y\ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ the\ result\ produced\ by\ sampleMethod\n
+comment1.params=
+comment1.target=void\ update()
 numComments=2
