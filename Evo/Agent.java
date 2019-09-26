@@ -6,5 +6,5 @@
  * @version September 24, 2019
  */
 public interface Agent {
-    void update();
+    public void update();
 }

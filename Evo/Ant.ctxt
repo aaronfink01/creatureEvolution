@@ -1,9 +1,11 @@
 #BlueJ class context
 comment0.target=Ant
 comment0.text=\n\ Write\ a\ description\ of\ class\ Ant\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ September\ 24,\ 2019\n
-comment1.params=
-comment1.target=Ant()
+comment1.params=position
+comment1.target=Ant(Vector)
 comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Ant\n
 comment2.params=
 comment2.target=void\ update()
-numComments=3
+comment3.params=
+comment3.target=Vector\ getPosition()
+numComments=4

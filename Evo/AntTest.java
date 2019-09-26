@@ -36,6 +36,9 @@ public class AntTest {
     
     @Test
     public void creation() {
-        Ant ant = new Ant();
+        Vector position = new Vector(0.0, 0.0);
+        Ant ant = new Ant(position);
+        assertEquals(ant.getPosition().x, 0.0, 0.01);
+        assertEquals(ant.getPosition().y, 0.0, 0.01);
     }
 }

@@ -1,4 +1,6 @@
 #BlueJ class context
 comment0.target=Creature
 comment0.text=\n\ Write\ a\ description\ of\ interface\ Creature\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ September\ 24,\ 2019\n
-numComments=1
+comment1.params=
+comment1.target=Vector\ getPosition()
+numComments=2

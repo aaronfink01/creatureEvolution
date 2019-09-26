@@ -48,7 +48,7 @@ public class VectorTest {
         vector.add(other);
         assertEquals(vector.x, -3.5, 0.01);
         assertEquals(vector.y, 10.0, 0.01);
-        vector.mult(3.5);
+        vector.mult(3.0);
         assertEquals(vector.x, -10.5, 0.01);
         assertEquals(vector.y, 30.0, 0.01);
         vector.sub(other);
@@ -78,5 +78,25 @@ public class VectorTest {
         Vector vector = new Vector(-2.0, 7.0);
         Vector other = new Vector(-1.5, 3.0);
         assertEquals(vector.dist(other), 4.03, 0.01);
+    }
+    
+    @Test
+    public void equals() {
+        Vector vector = new Vector(5.0, 3.0);
+        Vector success = new Vector(5.0, 3.0);
+        Vector failure = new Vector(4.0, 2.0);
+        assertTrue(vector.equals(success));
+        assertFalse(vector.equals(failure));
+    }
+    
+    @Test
+    public void copy() {
+        Vector vector = new Vector(5.0, 3.0);
+        Vector copy = vector.copy();
+        Vector alteration = new Vector(1.0, 2.0);
+        vector.add(alteration);
+        assertEquals(copy.x, 5.0, 0.01);
+        assertEquals(copy.y, 3.0, 0.01);
+        assertFalse(vector.equals(copy));
     }
 }
