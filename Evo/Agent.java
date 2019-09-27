@@ -1,3 +1,4 @@
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Write a description of interface Agent here.
@@ -7,4 +8,5 @@
  */
 public interface Agent {
     public void update();
+    public void display(GraphicsContext gc);
 }

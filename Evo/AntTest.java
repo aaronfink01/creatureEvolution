@@ -37,8 +37,23 @@ public class AntTest {
     @Test
     public void creation() {
         Vector position = new Vector(0.0, 0.0);
-        Ant ant = new Ant(position);
-        assertEquals(ant.getPosition().x, 0.0, 0.01);
-        assertEquals(ant.getPosition().y, 0.0, 0.01);
+        double direction = 315.0;
+        double speed = 4.0;
+        Ant ant = new Ant(position, direction, speed);
+        assertEquals(ant.position.x, 0.0, 0.01);
+        assertEquals(ant.position.y, 0.0, 0.01);
+        assertEquals(ant.direction, 315.0, 0.01);
+        assertEquals(ant.speed, 4.0, 0.01);
+    }
+    
+    @Test
+    public void update() {
+        Vector position = new Vector(0.0, 0.0);
+        double direction = 315.0;
+        double speed = 4.0;
+        Ant ant = new Ant(position, direction, speed);
+        ant.update();
+        assertEquals(ant.position.x, 2.83, 0.01);
+        assertEquals(ant.position.y, -2.83, 0.01);
     }
 }

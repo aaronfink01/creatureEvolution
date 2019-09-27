@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import java.util.Timer; 
+import java.util.TimerTask; 
+import javafx.scene.paint.Color;
 
 /**
  * Write a description of JavaFX class View here.
@@ -19,6 +22,8 @@ import javafx.scene.layout.Pane;
  */
 public class Manager extends Application {
     World world;
+    GraphicsContext gc;
+    Canvas canvas;
     
     public Manager() throws Exception {
         super.init();
@@ -33,14 +38,28 @@ public class Manager extends Application {
      * @param  stage the primary stage for this application.
      */
     @Override
-    public void start(Stage stage) {
-        Canvas canvas = new Canvas(600, 600);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+    public void start(Stage stage) throws Exception {
+        canvas = new Canvas(600, 600);
+        gc = canvas.getGraphicsContext2D();
         Pane root = new Pane();
         root.getChildren().add(canvas);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Evolution Simulator");
         stage.show();
+        
+        Timer timer = new Timer();
+        TimerTask task = new UpdateHandler(this);
+        timer.schedule(task, 0, 10);
+    }
+    
+    public void displayWorld() {
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        world.display(gc);
+    }
+    
+    public void updateWorld() {
+        world.update();
     }
 }

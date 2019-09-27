@@ -44,6 +44,43 @@ public class Vector {
         y /= mag;
     }
     
+    public Vector rotate(double angle) {
+        double targetAngle = getRotation() + angle;
+        double mag = getMag();
+        double resultX = mag * Math.cos(Math.toRadians(targetAngle));
+        double resultY = mag * Math.sin(Math.toRadians(targetAngle));
+        return new Vector(resultX, resultY);
+    }
+    
+    public double getRotation() {
+        if(x > 0 && y == 0) {
+            return 0.0;
+        }
+        if(x < 0 && y == 0) {
+            return 180.0;
+        }
+        if(x == 0 && y > 0) {
+            return 90.0;
+        }
+        if(x == 0 && y < 0) {
+            return 270.0;
+        }
+        double baseRotation = Math.toDegrees(Math.atan(y / x));
+        if(x > 0 && y > 0) {
+            return baseRotation;
+        }
+        if(x < 0 && y > 0) {
+            return 180 + baseRotation;
+        }
+        if(x < 0 && y < 0) {
+            return 180 + baseRotation;
+        }
+        if(x > 0 && y < 0) {
+            return 360 + baseRotation;
+        }
+        return baseRotation; // This is here just to satisfy the compiler;
+    }
+    
     public double getMag() {
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }

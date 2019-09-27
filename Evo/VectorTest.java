@@ -99,4 +99,25 @@ public class VectorTest {
         assertEquals(copy.y, 3.0, 0.01);
         assertFalse(vector.equals(copy));
     }
+    
+    @Test
+    public void rotate() {
+        Vector vector = new Vector(5.0, 3.0);
+        Vector rotatedVector = vector.rotate(70);
+        System.out.println(rotatedVector.x);
+        assertEquals(rotatedVector.x, -1.11, 0.01);
+        assertEquals(rotatedVector.y, 5.72, 0.01);
+    }
+    
+    @Test
+    public void getRotation() {
+        Vector vector = new Vector(5.0, 3.0);
+        assertEquals(vector.getRotation(), 30.96, 0.01);
+        vector = new Vector(-5.0, 3.0);
+        assertEquals(vector.getRotation(), 149.04, 0.01);
+        vector = new Vector(-5.0, -3.0);
+        assertEquals(vector.getRotation(), 210.96, 0.01);
+        vector = new Vector(5.0, -3.0);
+        assertEquals(vector.getRotation(), 329.04, 0.01);
+    }
 }

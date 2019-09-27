@@ -3,4 +3,6 @@ comment0.target=Agent
 comment0.text=\n\ Write\ a\ description\ of\ interface\ Agent\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ September\ 24,\ 2019\n
 comment1.params=
 comment1.target=void\ update()
-numComments=2
+comment2.params=gc
+comment2.target=void\ display(javafx.scene.canvas.GraphicsContext)
+numComments=3
