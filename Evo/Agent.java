@@ -9,4 +9,5 @@ import javafx.scene.canvas.GraphicsContext;
 public interface Agent {
     public void update();
     public void display(GraphicsContext gc);
+    public boolean isDead();
 }

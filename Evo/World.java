@@ -15,10 +15,7 @@ public class World {
      */
     public World() {
         agents = new ArrayList<Agent>();
-        
-        // This setup is temporary
-        agents.add(new Ant(new Vector(200.0, 100.0), 315.0, 1.0));
-        agents.add(new Ant(new Vector(435.0, 250.0), 270.0, 0.5));
+        addRandomAnts(10);
     }
     
     public void display(GraphicsContext gc) {
@@ -28,8 +25,32 @@ public class World {
     }
     
     public void update() {
-        for(Agent agent : agents) {
+        for(int i = agents.size() - 1; i > -1; i--) {
+            Agent agent = agents.get(i);
             agent.update();
+            if(agent.isDead()) {
+                agents.remove(i);
+            }
+        }
+    }
+    
+    public void addRandomAnts(int antCount) {
+        // Define the population
+        double msmm = 3.0;
+        double msmd = 1.0;
+        double msdm = 1.0;
+        double msdd = 0.5;
+        double rsmm = 0.0;
+        double rsmd = 5.0;
+        double rsdm = 7.0;
+        double rsdd = 5.0;
+        double rm = 15.0;
+        double rd = 5.0;
+        
+        // Initialize and add randomized ants
+        for(int i = 0; i < antCount; i++) {
+            Ant newAnt = Ant.initializeRandom(msmm, msmd, msdm, msdd, rsmm, rsmd, rsdm, rsdd, rm, rd);
+            agents.add(newAnt);
         }
     }
 }
