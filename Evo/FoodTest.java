@@ -4,16 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * The test class WorldTest.
+ * The test class FoodTest.
  *
  * @author  Aaron Fink
- * @version September 23, 2019
+ * @version September 27, 2019
  */
-public class WorldTest {
+public class FoodTest {
     /**
-     * Default constructor for test class WorldTest
+     * Default constructor for test class FoodTest
      */
-    public WorldTest() {
+    public FoodTest() {
     }
 
     /**
@@ -36,7 +36,9 @@ public class WorldTest {
     
     @Test
     public void creation() {
-        World world = new World();
-        assertNotNull(world.creatures);
+        Vector position = new Vector(200, 100);
+        Food food = new Food(position);
+        assertEquals(food.position.x, 200, 0.01);
+        assertEquals(food.position.y, 100, 0.01);
     }
 }

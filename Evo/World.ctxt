@@ -10,4 +10,6 @@ comment3.params=
 comment3.target=void\ update()
 comment4.params=antCount
 comment4.target=void\ addRandomAnts(int)
-numComments=5
+comment5.params=foodCount
+comment5.target=void\ addRandomFoods(int)
+numComments=6

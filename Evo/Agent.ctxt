@@ -5,6 +5,4 @@ comment1.params=
 comment1.target=void\ update()
 comment2.params=gc
 comment2.target=void\ display(javafx.scene.canvas.GraphicsContext)
-comment3.params=
-comment3.target=boolean\ isDead()
-numComments=4
+numComments=3

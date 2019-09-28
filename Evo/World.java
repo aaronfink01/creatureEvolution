@@ -8,28 +8,38 @@ import javafx.scene.canvas.GraphicsContext;
  * @version September 24
  */
 public class World {
-    ArrayList<Agent> agents;
+    ArrayList<Creature> creatures;
+    ArrayList<Food> foods;
     
     /**
      * Constructor for objects of class World
      */
     public World() {
-        agents = new ArrayList<Agent>();
+        creatures = new ArrayList<Creature>();
         addRandomAnts(10);
+        foods = new ArrayList<Food>();
+        addRandomFoods(50);
     }
     
     public void display(GraphicsContext gc) {
-        for(Agent agent : agents) {
-            agent.display(gc);
+        // Display the foods
+        for(Food food : foods) {
+            food.display(gc);
+        }
+        
+        // Display the creatures
+        for(Creature creature : creatures) {
+            creature.display(gc);
         }
     }
     
     public void update() {
-        for(int i = agents.size() - 1; i > -1; i--) {
-            Agent agent = agents.get(i);
-            agent.update();
-            if(agent.isDead()) {
-                agents.remove(i);
+        // Deal with creatures
+        for(int i = creatures.size() - 1; i > -1; i--) {
+            Creature creature = creatures.get(i);
+            creature.update();
+            if(creature.isDead()) {
+                creatures.remove(i);
             }
         }
     }
@@ -49,8 +59,15 @@ public class World {
         
         // Initialize and add randomized ants
         for(int i = 0; i < antCount; i++) {
-            Ant newAnt = Ant.initializeRandom(msmm, msmd, msdm, msdd, rsmm, rsmd, rsdm, rsdd, rm, rd);
-            agents.add(newAnt);
+             Ant newAnt = Ant.initializeRandom(msmm, msmd, msdm, msdd, rsmm, rsmd, rsdm, rsdd, rm, rd);
+             creatures.add(newAnt);
+        }
+    }
+    
+    public void addRandomFoods(int foodCount) {
+        for(int i = 0; i < foodCount; i++) {
+            Food newFood = Food.initializeRandom();
+            foods.add(newFood);
         }
     }
 }

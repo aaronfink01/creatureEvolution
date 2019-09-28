@@ -47,10 +47,10 @@ public class Ant implements Creature {
         position.add(motion);
         constrainToScreen();
         direction += rotation;
-        energy -= movement * radius * radius / 100000;
+        energy -= movement * radius * radius / 1000000;
     }
     
-    private void constrainToScreen() {
+    public void constrainToScreen() {
         if(position.x < radius) {
             position.x = radius;
         }
@@ -67,9 +67,10 @@ public class Ant implements Creature {
     
     public void display(GraphicsContext gc) {
         if(energy > 1.0) {
-            gc.setFill(Color.rgb(0, 200, 0, 1));
+            // Ants should never have more than full energy, but rounding errors may cause them to
+            gc.setFill(Color.rgb(200, 0, 0, 1));
         } else {
-            gc.setFill(Color.rgb(0, 200, 0, energy));
+            gc.setFill(Color.rgb(200, 0, 0, energy));
         }
         gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
     }
@@ -93,15 +94,15 @@ public class Ant implements Creature {
      */
     public static Ant initializeRandom(double msmm, double msmd, double msdm, double msdd, double rsmm, double rsmd, double rsdm, double rsdd, double rm, double rd)  {
         Random randomizer = new Random();
-        double x = randomizer.nextDouble() * 600;
-        double y = randomizer.nextDouble() * 600;
-        Vector position = new Vector(x, y);
         double direction = randomizer.nextDouble() * 360 - 180;
         double msm = randomizer.nextGaussian() * msmd + msmm;
         double msd = randomizer.nextGaussian() * msdd + msdm;
         double rsm = randomizer.nextGaussian() * rsmd + rsmm;
         double rsd = randomizer.nextGaussian() * rsdd + rsdm;
         double radius = randomizer.nextGaussian() * rd + rm;
+        double x = randomizer.nextDouble() * (600 - 2 * radius) + radius;
+        double y = randomizer.nextDouble() * (600 - 2 * radius) + radius;
+        Vector position = new Vector(x, y);
         return new Ant(position, direction, msm, msd, rsm, rsd, radius);
     }
 }

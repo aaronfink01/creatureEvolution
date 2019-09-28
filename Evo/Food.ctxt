@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Food
+comment0.text=\n\ Write\ a\ description\ of\ class\ Food\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ September\ 27,\ 2019\n
+comment1.params=position
+comment1.target=Food(Vector)
+comment2.params=
+comment2.target=void\ update()
+comment3.params=gc
+comment3.target=void\ display(javafx.scene.canvas.GraphicsContext)
+comment4.params=
+comment4.target=Food\ initializeRandom()
+numComments=5
