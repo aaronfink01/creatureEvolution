@@ -37,6 +37,6 @@ public class WorldTest {
     @Test
     public void creation() {
         World world = new World();
-        assertNotNull(world.creatures);
+        assertNotNull(world.agents);
     }
 }

@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.*;
 
 /**
  * The test class AntTest.
@@ -55,6 +56,37 @@ public class AntTest {
     }
     
     @Test
+    public void eat() {
+        ArrayList<Agent> agents = new ArrayList<Agent>();
+        Vector position = new Vector(200, 200);
+        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15);
+        agents.add(ant);
+        Food foodSucceed = new Food(new Vector(190, 185), 0.0144);
+        Food foodFail = new Food(new Vector(220, 235), 0.1);
+        agents.add(foodSucceed);
+        agents.add(foodFail);
+        ant.eat(agents);
+        assertTrue(foodSucceed.eaten);
+        assertFalse(foodFail.eaten);
+    }
+    
+    @Test
+    public void constrainEnergy() {
+        Vector position = new Vector(200, 200);
+        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15);
+        assertEquals(ant.energy, 1, 0.01);
+        ant.energy = 0.5;
+        ant.constrainEnergy();
+        assertEquals(ant.energy, 0.5, 0.01);
+        ant.energy = -0.5;
+        ant.constrainEnergy();
+        assertEquals(ant.energy, -0.5, 0.01);
+        ant.energy = 1.5;
+        ant.constrainEnergy();
+        assertEquals(ant.energy, 1.0, 0.01);
+    }
+    
+    @Test
     public void constrainToScreen() {
         Vector position = new Vector(0, 0);
         Ant ant = new Ant(position, 0, 10, 3, 5, 2, 15);
@@ -88,12 +120,12 @@ public class AntTest {
     }
     
     @Test
-    public void isDead() {
+    public void shouldBeRemoved() {
         Vector position = new Vector(300, 300);
         Ant ant = new Ant(position, 0, 10, 3, 5, 2, 15);
-        assertFalse(ant.isDead());
+        assertFalse(ant.shouldBeRemoved());
         ant.energy = -0.1;
-        assertTrue(ant.isDead());
+        assertTrue(ant.shouldBeRemoved());
     }
     
     @Test

@@ -13,6 +13,7 @@ public class Ant implements Creature {
     public Vector position;
     public double direction;
     public double energy;
+    public boolean eaten;
     
     // Lifetime traits
     public double movementSpeedMean;
@@ -32,6 +33,7 @@ public class Ant implements Creature {
         position = p;
         direction = d;
         energy = 1.0;
+        eaten = false;
         this.movementSpeedMean = msm;
         this.movementSpeedDeviation = msd;
         this.rotationSpeedMean = rsm;
@@ -40,7 +42,14 @@ public class Ant implements Creature {
         randomizer = new Random();
     }
     
-    public void update() {
+    public void update(ArrayList<Agent> agents) {
+        move();
+        eat(agents);
+        
+        constrainEnergy();
+    }
+    
+    public void move() {
         double movement = randomizer.nextGaussian() * movementSpeedDeviation + movementSpeedMean;
         double rotation = randomizer.nextGaussian() * rotationSpeedDeviation + rotationSpeedMean;
         Vector motion = new Vector(movement, 0.0).rotate(direction);
@@ -48,6 +57,23 @@ public class Ant implements Creature {
         constrainToScreen();
         direction += rotation;
         energy -= movement * radius * radius / 1000000;
+    }
+    
+    public void eat(ArrayList<Agent> agents) {
+        for(Agent agent : agents) {
+            if(agent instanceof Food) {
+                if(agent.withinRange(position, radius)) {
+                    energy += agent.getEnergyValue();
+                    agent.setEaten();
+                }
+            }
+        }
+    }
+    
+    public void constrainEnergy() {
+        if(energy > 1.0) {
+            energy = 1.0;
+        }
     }
     
     public void constrainToScreen() {
@@ -75,8 +101,20 @@ public class Ant implements Creature {
         gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
     }
     
-    public boolean isDead() {
-        return energy <= 0.0;
+    public boolean shouldBeRemoved() {
+        return energy <= 0.0 || eaten;
+    }
+    
+    public boolean withinRange(Vector center, double distance) {
+        return position.dist(center) < distance + radius;
+    }
+    
+    public double getEnergyValue() {
+        return energy;
+    }
+    
+    public void setEaten() {
+        eaten = true;
     }
     
     /**

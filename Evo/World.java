@@ -8,38 +8,29 @@ import javafx.scene.canvas.GraphicsContext;
  * @version September 24
  */
 public class World {
-    ArrayList<Creature> creatures;
-    ArrayList<Food> foods;
+    ArrayList<Agent> agents;
     
     /**
      * Constructor for objects of class World
      */
     public World() {
-        creatures = new ArrayList<Creature>();
+        agents = new ArrayList<Agent>();
         addRandomAnts(10);
-        foods = new ArrayList<Food>();
         addRandomFoods(50);
     }
     
     public void display(GraphicsContext gc) {
-        // Display the foods
-        for(Food food : foods) {
-            food.display(gc);
-        }
-        
-        // Display the creatures
-        for(Creature creature : creatures) {
-            creature.display(gc);
+        for(Agent agent : agents) {
+            agent.display(gc);
         }
     }
     
     public void update() {
-        // Deal with creatures
-        for(int i = creatures.size() - 1; i > -1; i--) {
-            Creature creature = creatures.get(i);
-            creature.update();
-            if(creature.isDead()) {
-                creatures.remove(i);
+        for(int i = agents.size() - 1; i > -1; i--) {
+            Agent agent = agents.get(i);
+            agent.update(agents);
+            if(agent.shouldBeRemoved()) {
+                agents.remove(i);
             }
         }
     }
@@ -60,14 +51,17 @@ public class World {
         // Initialize and add randomized ants
         for(int i = 0; i < antCount; i++) {
              Ant newAnt = Ant.initializeRandom(msmm, msmd, msdm, msdd, rsmm, rsmd, rsdm, rsdd, rm, rd);
-             creatures.add(newAnt);
+             agents.add(newAnt);
         }
     }
     
     public void addRandomFoods(int foodCount) {
+        double evm = 0.1;
+        double evd = 0.3;
+        
         for(int i = 0; i < foodCount; i++) {
-            Food newFood = Food.initializeRandom();
-            foods.add(newFood);
+            Food newFood = Food.initializeRandom(evm, evd);
+            agents.add(newFood);
         }
     }
 }
