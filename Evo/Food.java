@@ -14,12 +14,6 @@ public class Food extends Agent {
         super(position, Math.sqrt(energy) * 50, energy, 0, 200, 0);
     }
     
-    @Override
-    public void display(GraphicsContext gc) {
-        gc.setFill(Color.rgb(red, green, blue, 1));
-        gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
-    }
-    
     /**
      * Creates a randomized food
      * @param evm the mean energyValue for initialized foods
@@ -30,7 +24,7 @@ public class Food extends Agent {
         double x = randomizer.nextDouble() * 590 + 5;
         double y = randomizer.nextDouble() * 590 + 5;
         Vector position = new Vector(x, y);
-        double energyValue = randomizer.nextGaussian() * evd + evm;
-        return new Food(position, energyValue);
+        double energy = randomizer.nextGaussian() * evd + evm;
+        return new Food(position, energy);
     }
 }

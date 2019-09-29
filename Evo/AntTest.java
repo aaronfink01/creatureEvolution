@@ -44,7 +44,8 @@ public class AntTest {
         double rsm = -1.0;
         double rsd = 3.0;
         double radius = 15.0;
-        Ant ant = new Ant(position, direction, msm, msd, rsm, rsd, radius);
+        double energy = 0.9;
+        Ant ant = new Ant(position, direction, msm, msd, rsm, rsd, radius, energy);
         assertEquals(ant.position.x, 0.0, 0.01);
         assertEquals(ant.position.y, 0.0, 0.01);
         assertEquals(ant.direction, 315.0, 0.01);
@@ -53,13 +54,14 @@ public class AntTest {
         assertEquals(ant.rotationSpeedMean, -1.0, 0.01);
         assertEquals(ant.rotationSpeedDeviation, 3.0, 0.01);
         assertEquals(ant.radius, 15.0, 0.01);
+        assertEquals(ant.energy, 0.9, 0.01);
     }
     
     @Test
     public void eat() {
         ArrayList<Agent> agents = new ArrayList<Agent>();
         Vector position = new Vector(200, 200);
-        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15);
+        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15, 0.9);
         agents.add(ant);
         Food foodSucceed = new Food(new Vector(190, 185), 0.0144);
         Food foodFail = new Food(new Vector(220, 235), 0.1);
@@ -73,23 +75,23 @@ public class AntTest {
     @Test
     public void constrainEnergy() {
         Vector position = new Vector(200, 200);
-        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15);
-        assertEquals(ant.energy, 4.5, 0.01);
-        ant.energy = 1.5;
+        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15, 0.09);
+        assertEquals(ant.energy, 0.09, 0.01);
+        ant.energy = 0.05;
         ant.constrainEnergy();
-        assertEquals(ant.energy, 1.5, 0.01);
+        assertEquals(ant.energy, 0.05, 0.01);
         ant.energy = -0.5;
         ant.constrainEnergy();
         assertEquals(ant.energy, -0.5, 0.01);
-        ant.energy = 5.5;
+        ant.energy = 0.15;
         ant.constrainEnergy();
-        assertEquals(ant.energy, 4.5, 0.01);
+        assertEquals(ant.energy, 0.09, 0.01);
     }
     
     @Test
     public void constrainToScreen() {
         Vector position = new Vector(0, 0);
-        Ant ant = new Ant(position, 0, 10, 3, 5, 2, 15);
+        Ant ant = new Ant(position, 0, 10, 3, 5, 2, 15, 0.9);
         ant.constrainToScreen();
         assertEquals(position.x, 15, 0.01);
         assertEquals(position.y, 15, 0.01);

@@ -11,9 +11,9 @@ import java.util.*;
 public class Ant extends Agent {
     // Simulation variables (not included in superclass Agent)
     public double direction;
+    public int framesSinceReproduction = 0;
     
     // Lifetime traits
-    public double maxEnergy;
     public double movementSpeedMean;
     public double movementSpeedDeviation;
     public double rotationSpeedMean;
@@ -25,12 +25,11 @@ public class Ant extends Agent {
     /**
      * Constructor for objects of class Ant
      */
-    public Ant(Vector p, double d, double msm, double msd, double rsm, double rsd, double r) {
-        super(p, r, Math.pow(r, 2) / 50, 200, 0, 0);
+    public Ant(Vector p, double d, double msm, double msd, double rsm, double rsd, double r, double e) {
+        super(p, r, e, 200, 0, 0);
         
         this.direction = d;
         
-        this.maxEnergy = Math.pow(r, 2) / 50;
         this.movementSpeedMean = msm;
         this.movementSpeedDeviation = msd;
         this.rotationSpeedMean = rsm;
@@ -38,17 +37,15 @@ public class Ant extends Agent {
         randomizer = new Random();
     }
     
-    @Override
-    public void display(GraphicsContext gc) {
-        gc.setFill(Color.rgb(red, green, blue, Math.max(Math.min(energy, maxEnergy), 0) / maxEnergy));
-        gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
-    }
-    
     public void update(ArrayList<Agent> agents) {
         move();
         eat(agents);
+        if(readyToReproduce()) {
+            reproduce(agents);
+        }
         
         constrainEnergy();
+        framesSinceReproduction++;
     }
     
     public void move() {
@@ -58,24 +55,52 @@ public class Ant extends Agent {
         position.add(motion);
         constrainToScreen();
         direction += rotation;
-        energy -= movement * radius * radius / 1000000;
+        energy -= movement * radius * radius / 10000000;
     }
     
     public void eat(ArrayList<Agent> agents) {
         for(Agent agent : agents) {
             if(agent instanceof Food) {
-                if(agent.withinRange(position, radius)) {
-                    energy += agent.getEnergyValue();
-                    agent.setEaten();
+                Food food = (Food)agent;
+                if(food.withinRange(position, radius)) {
+                    energy += food.getEnergyValue();
+                    food.setEaten();
                 }
             }
         }
+    }
+    
+    public void reproduce(ArrayList<Agent> agents) {
+        for(Agent agent : agents) {
+            if(agent instanceof Ant && agent != this) {
+                Ant ant = (Ant)agent;
+                if(ant.withinRange(position, radius) && ant.readyToReproduce()) {
+                    System.out.println("hell yeah");
+                    Ant baby = Ant.simulateReproduction(this, ant);
+                    agents.add(baby);
+                    break;
+                }
+            }
+        }
+    }
+    
+    public boolean readyToReproduce() {
+        System.out.println(framesSinceReproduction);
+        return framesSinceReproduction > 500;
+    }
+    
+    public void resetFramesSinceReproduction() {
+        framesSinceReproduction = 0;
     }
     
     public void constrainEnergy() {
         if(energy > maxEnergy) {
             energy = maxEnergy;
         }
+    }
+    
+    public void reduceEnergy(double lostEnergy) {
+        energy -= lostEnergy;
     }
     
     public void constrainToScreen() {
@@ -117,6 +142,33 @@ public class Ant extends Agent {
         double x = randomizer.nextDouble() * (600 - 2 * radius) + radius;
         double y = randomizer.nextDouble() * (600 - 2 * radius) + radius;
         Vector position = new Vector(x, y);
-        return new Ant(position, direction, msm, msd, rsm, rsd, radius);
+        return new Ant(position, direction, msm, msd, rsm, rsd, radius, Math.pow(radius, 2) / 250);
+    }
+    
+    public static Ant simulateReproduction(Ant firstParent, Ant secondParent) {
+        firstParent.resetFramesSinceReproduction();
+        secondParent.resetFramesSinceReproduction();
+        
+        Random randomizer = new Random();
+        Vector position = Vector.div(Vector.add(firstParent.position, secondParent.position), 2);
+        double direction = (firstParent.direction + secondParent.direction) / 2;
+        double msmAverage = (firstParent.movementSpeedMean + secondParent.movementSpeedMean) / 2;
+        double msm = randomizer.nextGaussian() * msmAverage / 10 + msmAverage;
+        double msdAverage = (firstParent.movementSpeedDeviation + secondParent.movementSpeedDeviation) / 2;
+        double msd = randomizer.nextGaussian() * msdAverage / 10 + msdAverage;
+        double rsmAverage = (firstParent.rotationSpeedMean + secondParent.rotationSpeedMean) / 2;
+        double rsm = randomizer.nextGaussian() * rsmAverage / 10 + rsmAverage;
+        double rsdAverage = (firstParent.rotationSpeedDeviation + secondParent.rotationSpeedDeviation) / 2;
+        double rsd = randomizer.nextGaussian() * rsdAverage / 10 + rsdAverage;
+        double radiusAverage = (firstParent.radius + secondParent.radius) / 2;
+        double radius = randomizer.nextGaussian() * radiusAverage / 10 + radiusAverage;
+        
+        double energyFromFirstParent = firstParent.getEnergyValue() / 2;
+        double energyFromSecondParent = secondParent.getEnergyValue() / 2;
+        double energy = energyFromFirstParent + energyFromSecondParent;
+        firstParent.reduceEnergy(energyFromFirstParent);
+        secondParent.reduceEnergy(energyFromSecondParent);
+        
+        return new Ant(position, direction, msm, msd, rsm, rsd, radius, energy);
     }
 }

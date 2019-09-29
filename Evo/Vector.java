@@ -23,9 +23,17 @@ public class Vector {
         y += other.y;
     }
     
+    public static Vector add(Vector first, Vector second) {
+        return new Vector(first.x + second.x, first.y + second.y);
+    }
+    
     public void sub(Vector other) {
         x -= other.x;
         y -= other.y;
+    }
+    
+    public static Vector sub(Vector first, Vector second) {
+        return new Vector(first.x - second.x, first.y - second.y);
     }
     
     public void mult(double scalar) {
@@ -33,9 +41,17 @@ public class Vector {
         y *= scalar;
     }
     
+    public static Vector mult(Vector vector, double scalar) {
+        return new Vector(vector.x * scalar, vector.y * scalar);
+    }
+    
     public void div(double scalar) {
         x /= scalar;
         y /= scalar;
+    }
+    
+    public static Vector div(Vector vector, double scalar) {
+        return new Vector(vector.x / scalar, vector.y / scalar);
     }
     
     public void normalize() {

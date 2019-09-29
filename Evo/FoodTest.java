@@ -42,6 +42,7 @@ public class FoodTest {
         assertEquals(food.position.x, 200, 0.01);
         assertEquals(food.position.y, 100, 0.01);
         assertEquals(food.energy, 0.1, 0.01);
+        assertEquals(food.maxEnergy, 0.1, 0.01);
         assertEquals(food.radius, 15.81, 0.01);
     }
 }

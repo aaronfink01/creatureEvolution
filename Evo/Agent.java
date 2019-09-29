@@ -12,6 +12,7 @@ public class Agent {
     Vector position;
     double radius;
     double energy;
+    double maxEnergy;
     boolean eaten = false;
     int red, green, blue;
     
@@ -19,6 +20,7 @@ public class Agent {
         this.position = p;
         this.radius = r;
         this.energy = e;
+        this.maxEnergy = Math.pow(r, 2) / 2500;
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -27,7 +29,7 @@ public class Agent {
     public void update(ArrayList<Agent> agents) {}
     
     public void display(GraphicsContext gc) {
-        gc.setFill(Color.rgb(red, green, blue, Math.max(Math.min(energy, 1), 0)));
+        gc.setFill(Color.rgb(red, green, blue, Math.max(Math.min(energy, maxEnergy), 0) / maxEnergy));
         gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
     }
     
