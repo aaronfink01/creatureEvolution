@@ -9,6 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class World {
     ArrayList<Agent> agents;
+    int frameCount = 0;
     
     /**
      * Constructor for objects of class World
@@ -26,6 +27,7 @@ public class World {
     }
     
     public void update() {
+        // Handle agents
         for(int i = agents.size() - 1; i > -1; i--) {
             Agent agent = agents.get(i);
             agent.update(agents);
@@ -33,6 +35,13 @@ public class World {
                 agents.remove(i);
             }
         }
+        
+        // Add more food
+        if(frameCount % 100 == 0) {
+            addRandomFoods(1);
+        }
+        
+        frameCount++;
     }
     
     public void addRandomAnts(int antCount) {

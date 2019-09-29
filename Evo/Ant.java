@@ -13,6 +13,7 @@ public class Ant extends Agent {
     public double direction;
     
     // Lifetime traits
+    public double maxEnergy;
     public double movementSpeedMean;
     public double movementSpeedDeviation;
     public double rotationSpeedMean;
@@ -25,14 +26,22 @@ public class Ant extends Agent {
      * Constructor for objects of class Ant
      */
     public Ant(Vector p, double d, double msm, double msd, double rsm, double rsd, double r) {
-        super(p, r, 1, 200, 0, 0);
+        super(p, r, Math.pow(r, 2) / 50, 200, 0, 0);
+        
         this.direction = d;
         
+        this.maxEnergy = Math.pow(r, 2) / 50;
         this.movementSpeedMean = msm;
         this.movementSpeedDeviation = msd;
         this.rotationSpeedMean = rsm;
         this.rotationSpeedDeviation = rsd;
         randomizer = new Random();
+    }
+    
+    @Override
+    public void display(GraphicsContext gc) {
+        gc.setFill(Color.rgb(red, green, blue, Math.max(Math.min(energy, maxEnergy), 0) / maxEnergy));
+        gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
     }
     
     public void update(ArrayList<Agent> agents) {
@@ -64,8 +73,8 @@ public class Ant extends Agent {
     }
     
     public void constrainEnergy() {
-        if(energy > 1.0) {
-            energy = 1.0;
+        if(energy > maxEnergy) {
+            energy = maxEnergy;
         }
     }
     

@@ -74,16 +74,16 @@ public class AntTest {
     public void constrainEnergy() {
         Vector position = new Vector(200, 200);
         Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15);
-        assertEquals(ant.energy, 1, 0.01);
-        ant.energy = 0.5;
+        assertEquals(ant.energy, 4.5, 0.01);
+        ant.energy = 1.5;
         ant.constrainEnergy();
-        assertEquals(ant.energy, 0.5, 0.01);
+        assertEquals(ant.energy, 1.5, 0.01);
         ant.energy = -0.5;
         ant.constrainEnergy();
         assertEquals(ant.energy, -0.5, 0.01);
-        ant.energy = 1.5;
+        ant.energy = 5.5;
         ant.constrainEnergy();
-        assertEquals(ant.energy, 1.0, 0.01);
+        assertEquals(ant.energy, 4.5, 0.01);
     }
     
     @Test
@@ -117,15 +117,6 @@ public class AntTest {
         ant.constrainToScreen();
         assertEquals(position.x, 300, 0.01);
         assertEquals(position.y, 300, 0.01);
-    }
-    
-    @Test
-    public void shouldBeRemoved() {
-        Vector position = new Vector(300, 300);
-        Ant ant = new Ant(position, 0, 10, 3, 5, 2, 15);
-        assertFalse(ant.shouldBeRemoved());
-        ant.energy = -0.1;
-        assertTrue(ant.shouldBeRemoved());
     }
     
     @Test

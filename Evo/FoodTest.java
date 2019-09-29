@@ -37,36 +37,11 @@ public class FoodTest {
     @Test
     public void creation() {
         Vector position = new Vector(200, 100);
-        double energyValue = 0.1;
-        Food food = new Food(position, energyValue);
+        double energy = 0.1;
+        Food food = new Food(position, energy);
         assertEquals(food.position.x, 200, 0.01);
         assertEquals(food.position.y, 100, 0.01);
-    }
-    
-    @Test
-    public void shouldBeRemoved() {
-        Vector position = new Vector(300, 300);
-        double energyValue = 0.1;
-        Food food = new Food(position, energyValue);
-        assertFalse(food.shouldBeRemoved());
-        food.eaten = true;
-        assertTrue(food.shouldBeRemoved());
-    }
-    
-    @Test
-    public void withinRange() {
-        Vector position = new Vector(200, 400);
-        Food food = new Food(position, 0.09);
-        Vector center = new Vector(180, 400);
-        assertTrue(food.withinRange(center, 10));
-        assertFalse(food.withinRange(center, 3));
-    }
-    
-    @Test
-    public void setEaten() {
-        Food food = new Food(new Vector(300, 300), 0.05);
-        assertFalse(food.eaten);
-        food.setEaten();
-        assertTrue(food.eaten);
+        assertEquals(food.energy, 0.1, 0.01);
+        assertEquals(food.radius, 15.81, 0.01);
     }
 }
