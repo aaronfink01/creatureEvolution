@@ -8,37 +8,30 @@ import java.util.*;
  * @author Aaron Fink
  * @version September 24, 2019
  */
-public class Ant implements Creature {
-    // Simulation variables
-    public Vector position;
+public class Ant extends Agent {
+    // Simulation variables (not included in superclass Agent)
     public double direction;
-    public double energy;
-    public boolean eaten;
     
     // Lifetime traits
     public double movementSpeedMean;
     public double movementSpeedDeviation;
     public double rotationSpeedMean;
     public double rotationSpeedDeviation;
-    public double radius;
     
     // Utilities
     public Random randomizer;
-    
 
     /**
      * Constructor for objects of class Ant
      */
     public Ant(Vector p, double d, double msm, double msd, double rsm, double rsd, double r) {
-        position = p;
-        direction = d;
-        energy = 1.0;
-        eaten = false;
+        super(p, r, 1, 200, 0, 0);
+        this.direction = d;
+        
         this.movementSpeedMean = msm;
         this.movementSpeedDeviation = msd;
         this.rotationSpeedMean = rsm;
         this.rotationSpeedDeviation = rsd;
-        this.radius = r;
         randomizer = new Random();
     }
     
@@ -89,32 +82,6 @@ public class Ant implements Creature {
         if(position.y > 600 - radius) {
             position.y = 600 - radius;
         }
-    }
-    
-    public void display(GraphicsContext gc) {
-        if(energy > 1.0) {
-            // Ants should never have more than full energy, but rounding errors may cause them to
-            gc.setFill(Color.rgb(200, 0, 0, 1));
-        } else {
-            gc.setFill(Color.rgb(200, 0, 0, energy));
-        }
-        gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
-    }
-    
-    public boolean shouldBeRemoved() {
-        return energy <= 0.0 || eaten;
-    }
-    
-    public boolean withinRange(Vector center, double distance) {
-        return position.dist(center) < distance + radius;
-    }
-    
-    public double getEnergyValue() {
-        return energy;
-    }
-    
-    public void setEaten() {
-        eaten = true;
     }
     
     /**

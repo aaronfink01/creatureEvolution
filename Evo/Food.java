@@ -9,41 +9,15 @@ import java.lang.*;
  * @author Aaron Fink
  * @version September 27, 2019
  */
-public class Food implements Agent {
-    Vector position;
-    double energyValue;
-    double radius;
-    boolean eaten;
-    
-    public Food(Vector position, double energyValue) {
-        this.position = position;
-        this.energyValue = energyValue;
-        radius = Math.sqrt(energyValue) * 50;
-        eaten = false;
+public class Food extends Agent {
+    public Food(Vector position, double energy) {
+        super(position, Math.sqrt(energy) * 50, energy, 0, 200, 0);
     }
     
-    public void update(ArrayList<Agent> agents) {
-    }
-    
+    @Override
     public void display(GraphicsContext gc) {
-        gc.setFill(Color.rgb(0, 200, 0));
+        gc.setFill(Color.rgb(red, green, blue, 1));
         gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
-    }
-    
-    public boolean shouldBeRemoved() {
-        return eaten;
-    }
-    
-    public boolean withinRange(Vector center, double distance) {
-        return position.dist(center) < distance + radius;
-    }
-    
-    public double getEnergyValue() {
-        return energyValue;
-    }
-    
-    public void setEaten() {
-        eaten = true;
     }
     
     /**
