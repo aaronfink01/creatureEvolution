@@ -45,7 +45,8 @@ public class AntTest {
         double rsd = 3.0;
         double radius = 15.0;
         double energy = 0.9;
-        Ant ant = new Ant(position, direction, msm, msd, rsm, rsd, radius, energy);
+        double generation = 1.6;
+        Ant ant = new Ant(position, direction, msm, msd, rsm, rsd, radius, energy, generation);
         assertEquals(ant.position.x, 0.0, 0.01);
         assertEquals(ant.position.y, 0.0, 0.01);
         assertEquals(ant.direction, 315.0, 0.01);
@@ -55,13 +56,14 @@ public class AntTest {
         assertEquals(ant.rotationSpeedDeviation, 3.0, 0.01);
         assertEquals(ant.radius, 15.0, 0.01);
         assertEquals(ant.energy, 0.9, 0.01);
+        assertEquals(ant.generation, 1.6, 0.01);
     }
     
     @Test
     public void eat() {
         ArrayList<Agent> agents = new ArrayList<Agent>();
         Vector position = new Vector(200, 200);
-        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15, 0.9);
+        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15, 0.9, 1);
         agents.add(ant);
         Food foodSucceed = new Food(new Vector(190, 185), 0.0144);
         Food foodFail = new Food(new Vector(220, 235), 0.1);
@@ -75,7 +77,7 @@ public class AntTest {
     @Test
     public void constrainEnergy() {
         Vector position = new Vector(200, 200);
-        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15, 0.09);
+        Ant ant = new Ant(position, 0, 10, 3, -2, 5, 15, 0.09, 1);
         assertEquals(ant.energy, 0.09, 0.01);
         ant.energy = 0.05;
         ant.constrainEnergy();
@@ -91,7 +93,7 @@ public class AntTest {
     @Test
     public void constrainToScreen() {
         Vector position = new Vector(0, 0);
-        Ant ant = new Ant(position, 0, 10, 3, 5, 2, 15, 0.9);
+        Ant ant = new Ant(position, 0, 10, 3, 5, 2, 15, 0.9, 1);
         ant.constrainToScreen();
         assertEquals(position.x, 15, 0.01);
         assertEquals(position.y, 15, 0.01);

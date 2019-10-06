@@ -25,8 +25,8 @@ public class Ant extends Agent {
     /**
      * Constructor for objects of class Ant
      */
-    public Ant(Vector p, double d, double msm, double msd, double rsm, double rsd, double r, double e) {
-        super(p, r, e, 200, 0, 0);
+    public Ant(Vector p, double d, double msm, double msd, double rsm, double rsd, double r, double e, double g) {
+        super(p, r, e, 200, 0, 0, g);
         
         this.direction = d;
         
@@ -75,7 +75,6 @@ public class Ant extends Agent {
             if(agent instanceof Ant && agent != this) {
                 Ant ant = (Ant)agent;
                 if(ant.withinRange(position, radius) && ant.readyToReproduce()) {
-                    System.out.println("hell yeah");
                     Ant baby = Ant.simulateReproduction(this, ant);
                     agents.add(baby);
                     break;
@@ -85,7 +84,6 @@ public class Ant extends Agent {
     }
     
     public boolean readyToReproduce() {
-        System.out.println(framesSinceReproduction);
         return framesSinceReproduction > 500;
     }
     
@@ -142,7 +140,7 @@ public class Ant extends Agent {
         double x = randomizer.nextDouble() * (600 - 2 * radius) + radius;
         double y = randomizer.nextDouble() * (600 - 2 * radius) + radius;
         Vector position = new Vector(x, y);
-        return new Ant(position, direction, msm, msd, rsm, rsd, radius, Math.pow(radius, 2) / 250);
+        return new Ant(position, direction, msm, msd, rsm, rsd, radius, Math.pow(radius, 2) / 250, 1);
     }
     
     public static Ant simulateReproduction(Ant firstParent, Ant secondParent) {
@@ -169,6 +167,10 @@ public class Ant extends Agent {
         firstParent.reduceEnergy(energyFromFirstParent);
         secondParent.reduceEnergy(energyFromSecondParent);
         
-        return new Ant(position, direction, msm, msd, rsm, rsd, radius, energy);
+        double firstParentGeneration = firstParent.getGeneration();
+        double secondParentGeneration = secondParent.getGeneration();
+        double generation = 1 + (firstParentGeneration + secondParentGeneration) / 2;
+        
+        return new Ant(position, direction, msm, msd, rsm, rsd, radius, energy, generation);
     }
 }

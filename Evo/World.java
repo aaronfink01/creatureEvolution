@@ -1,5 +1,7 @@
 import java.util.*;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
 
 /**
  * Write a description of class World here.
@@ -24,6 +26,24 @@ public class World {
         for(Agent agent : agents) {
             agent.display(gc);
         }
+        
+        displayData(gc);
+    }
+    
+    public void displayData(GraphicsContext gc) {
+        double averageGeneration = 0;
+        double antCount = 0;
+        for(Agent agent : agents) {
+            if(agent instanceof Ant) {
+                averageGeneration += agent.generation;
+                antCount++;
+            }
+        }
+        averageGeneration /= antCount;
+        Double roundedGeneration = Math.round(averageGeneration * 10) / 10.0;
+        String generationText = "Generation: " + Double.toString(roundedGeneration);
+        gc.setFill(Color.BLACK);
+        gc.fillText(generationText, 10, 20);
     }
     
     public void update() {
@@ -37,11 +57,17 @@ public class World {
         }
         
         // Add more food
-        if(frameCount % 100 == 0) {
+        if(frameCount % 50 == 0) {
             addRandomFoods(1);
         }
         
         frameCount++;
+    }
+    
+    public void outputData() {
+        if(frameCount % 100 == 0) {
+            DataHandler.outputData(agents, frameCount);
+        }
     }
     
     public void addRandomAnts(int antCount) {

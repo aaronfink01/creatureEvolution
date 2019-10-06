@@ -12,12 +12,13 @@ public class UpdateHandler extends TimerTask {
     /**
      * Constructor for objects of class UpdateHandler
      */
-    public UpdateHandler(Manager manager) throws Exception {
+    public UpdateHandler(Manager manager) {
         this.manager = manager;
     }
     
     public void run() {
         manager.displayWorld();
         manager.updateWorld();
+        manager.outputData();
     }
 }

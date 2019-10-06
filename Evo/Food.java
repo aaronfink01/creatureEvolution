@@ -11,7 +11,7 @@ import java.lang.*;
  */
 public class Food extends Agent {
     public Food(Vector position, double energy) {
-        super(position, Math.sqrt(energy) * 50, energy, 0, 200, 0);
+        super(position, Math.sqrt(energy) * 50, energy, 0, 200, 0, 1);
     }
     
     /**

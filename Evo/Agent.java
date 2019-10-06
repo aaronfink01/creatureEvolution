@@ -1,3 +1,5 @@
+
+
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
 import java.util.*;
@@ -15,8 +17,9 @@ public class Agent {
     double maxEnergy;
     boolean eaten = false;
     int red, green, blue;
+    double generation;
     
-    public Agent(Vector p, double r, double e, int red, int green, int blue) {
+    public Agent(Vector p, double r, double e, int red, int green, int blue, double g) {
         this.position = p;
         this.radius = r;
         this.energy = e;
@@ -24,6 +27,7 @@ public class Agent {
         this.red = red;
         this.green = green;
         this.blue = blue;
+        this.generation = g;
     }
     
     public void update(ArrayList<Agent> agents) {}
@@ -43,6 +47,10 @@ public class Agent {
     
     public double getEnergyValue() {
         return energy;
+    }
+    
+    public double getGeneration() {
+        return generation;
     }
     
     public void setEaten() {

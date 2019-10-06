@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Agent
 comment0.text=\n\ Write\ a\ description\ of\ class\ Agent\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ September\ 28,\ 2019\n
-comment1.params=p\ r\ e\ red\ green\ blue
-comment1.target=Agent(Vector,\ double,\ double,\ int,\ int,\ int)
+comment1.params=p\ r\ e\ red\ green\ blue\ g
+comment1.target=Agent(Vector,\ double,\ double,\ int,\ int,\ int,\ double)
 comment2.params=agents
 comment2.target=void\ update(java.util.ArrayList)
 comment3.params=gc
@@ -14,5 +14,7 @@ comment5.target=boolean\ withinRange(Vector,\ double)
 comment6.params=
 comment6.target=double\ getEnergyValue()
 comment7.params=
-comment7.target=void\ setEaten()
-numComments=8
+comment7.target=double\ getGeneration()
+comment8.params=
+comment8.target=void\ setEaten()
+numComments=9
