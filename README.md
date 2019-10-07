@@ -27,3 +27,4 @@ What are the goals we want to achieve with this project overall?
 - [x] choosing a language
 
 ## Bug List
+- JavaFX sometimes stops displaying simulation when frame rate is too fast
