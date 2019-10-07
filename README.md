@@ -28,3 +28,7 @@ What are the goals we want to achieve with this project overall?
 
 ## Bug List
 - JavaFX sometimes stops displaying simulation when frame rate is too fast
+
+
+## Think About
+- https://softwareengineering.stackexchange.com/questions/147480/should-one-check-for-null-if-he-does-not-expect-null
