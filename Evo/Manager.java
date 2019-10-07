@@ -50,7 +50,7 @@ public class Manager extends Application {
         
         Timer timer = new Timer();
         TimerTask task = new UpdateHandler(this);
-        timer.schedule(task, 0, 1);
+        timer.schedule(task, 0, 10);
     }
     
     public void displayWorld() {

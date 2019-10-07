@@ -1,5 +1,3 @@
-
-
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
 import java.util.*;
@@ -38,11 +36,16 @@ public class Agent {
     }
     
     public boolean shouldBeRemoved() {
-        return energy < 0 || eaten;
+        return (energy < 0) || (eaten);
     }
     
-    public boolean withinRange(Vector center, double distance) {
-        return position.dist(center) < distance + radius;
+    /**
+     * is there any overlap between this agent and another (boundaries overlapping)
+     */
+    public boolean overlap(Vector otherAgentPosition, double otherAgentRadius) {
+        // If otherAgentPosition is null we won't catch that,
+        // but instead let the exception bubble up and follow the stack trace.
+        return position.dist(otherAgentPosition) < (radius + otherAgentRadius);
     }
     
     public double getEnergyValue() {

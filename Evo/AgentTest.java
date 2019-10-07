@@ -62,12 +62,25 @@ public class AgentTest {
     }
     
     @Test
-    public void withinRange() {
+    public void overlap() {
         Vector position = new Vector(200, 400);
         Agent agent = new Agent(position, 15, 0.09, 0, 200, 0, 1);
-        Vector center = new Vector(180, 400);
-        assertTrue(agent.withinRange(center, 10));
-        assertFalse(agent.withinRange(center, 3));
+        Vector centerOtherAgent = new Vector(180, 400);
+        assertTrue(agent.overlap(centerOtherAgent, 10));
+        assertFalse(agent.overlap(centerOtherAgent, 3));
+        //agent.overlap(null, 10); We thought of this!
+        
+        // junit 5 supposedly
+        // https://www.baeldung.com/junit-assert-exception
+        //assertThrows(NullPointerException.class, () -> {agent.overlap(null, 10);});
+    }
+    
+    // from https://www.baeldung.com/junit-assert-exception
+    @Test(expected = NullPointerException.class)
+    public void overlapNull() {
+        Vector position = new Vector(200, 400);
+        Agent agent = new Agent(position, 15, 0.09, 0, 200, 0, 1);
+        agent.overlap(null, 10);
     }
     
     @Test

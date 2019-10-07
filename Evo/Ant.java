@@ -62,7 +62,7 @@ public class Ant extends Agent {
         for(Agent agent : agents) {
             if(agent instanceof Food) {
                 Food food = (Food)agent;
-                if(food.withinRange(position, radius)) {
+                if(food.overlap(position, radius)) {
                     energy += food.getEnergyValue();
                     food.setEaten();
                 }
@@ -74,7 +74,7 @@ public class Ant extends Agent {
         for(Agent agent : agents) {
             if(agent instanceof Ant && agent != this) {
                 Ant ant = (Ant)agent;
-                if(ant.withinRange(position, radius) && ant.readyToReproduce()) {
+                if(ant.overlap(position, radius) && ant.readyToReproduce()) {
                     Ant baby = Ant.simulateReproduction(this, ant);
                     agents.add(baby);
                     break;
