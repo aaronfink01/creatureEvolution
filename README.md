@@ -18,11 +18,12 @@ What are the goals we want to achieve with this project overall?
 
 ## Currently Doing
 - [ ] designing tests
-- [ ] choosing a language
+- [ ] writing code
 
 ## Needs to be Done
 
 ## Already Finished
 - [x] Aaron needs to fill out a project sheet for Michelle.
+- [x] choosing a language
 
 ## Bug List
