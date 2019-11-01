@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Brain
+comment0.text=\n\ Write\ a\ description\ of\ class\ Brain\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ October\ 31,\ 2019\n
+comment1.params=w\ b
+comment1.target=Brain(double[][][],\ double[][])
+comment2.params=inputs
+comment2.target=double[]\ processInputs(double[])
+comment3.params=value
+comment3.target=double\ activate(double)
+numComments=4
