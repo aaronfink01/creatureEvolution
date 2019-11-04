@@ -9,23 +9,25 @@ import java.util.*;
  * @version September 28, 2019
  */
 public class Agent {
-    Vector position;
-    double radius;
-    double energy;
-    double maxEnergy;
+    Vector position = null;
+    double radius = 10.0;
+    double energy = 10.0;
+    double maxEnergy = 20.0;
     boolean eaten = false;
-    int red, green, blue;
-    double generation;
+    int red = 0, green = 0, blue = 0;
+    double generation = 1;
+    double energyFactor = 2500; // trying to keep energy within bounds (energy per area? area per energy?
     
-    public Agent(Vector p, double r, double e, int red, int green, int blue, double g) {
-        this.position = p;
-        this.radius = r;
-        this.energy = e;
-        this.maxEnergy = Math.pow(r, 2) / 2500;
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
-        this.generation = g;
+    public Agent(Vector newPosition, double newRadius, double newEnergy, 
+                int newRed, int newGreen, int newBlue, double newGeneration) {
+        this.position = newPosition; // <== beware null!!
+        this.radius = newRadius;
+        this.energy = newEnergy;
+        this.maxEnergy = Math.pow(newRadius, 2) / 2500;
+        this.red = newRed;
+        this.green = newGreen;
+        this.blue = newBlue;
+        this.generation = newGeneration;
     }
     
     public void update(ArrayList<Agent> agents) {}

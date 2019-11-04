@@ -41,7 +41,7 @@ public class Ant extends Agent {
         move();
         eat(agents);
         if(readyToReproduce()) {
-            reproduce(agents);
+            attemptToReproduce(agents);
         }
         
         constrainEnergy();
@@ -70,7 +70,7 @@ public class Ant extends Agent {
         }
     }
     
-    public void reproduce(ArrayList<Agent> agents) {
+    public void attemptToReproduce(ArrayList<Agent> agents) {
         for(Agent agent : agents) {
             if(agent instanceof Ant && agent != this) {
                 Ant ant = (Ant)agent;

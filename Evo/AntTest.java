@@ -138,4 +138,10 @@ public class AntTest {
         Ant ant = Ant.initializeRandom(msmm, msmd, msdm, msdd, rsmm, rsmd, rsdm, rsdd, rm, rd);
         assertNotNull(ant);
     }
+
+    @Test
+    public void testAttemptToReproduce()
+    {
+    }
 }
+
