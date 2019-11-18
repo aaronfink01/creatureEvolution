@@ -143,6 +143,10 @@ public class Ant extends Agent {
         return new Ant(position, direction, msm, msd, rsm, rsd, radius, Math.pow(radius, 2) / 250, 1);
     }
     
+    /**
+     * Aaveraging each fixed trait between the two parents AND randomly changing by up to 10%.
+     * AND parents lose the energy that they give to their offspring. 
+     */
     public static Ant simulateReproduction(Ant firstParent, Ant secondParent) {
         firstParent.resetFramesSinceReproduction();
         secondParent.resetFramesSinceReproduction();
@@ -150,17 +154,28 @@ public class Ant extends Agent {
         Random randomizer = new Random();
         Vector position = Vector.div(Vector.add(firstParent.position, secondParent.position), 2);
         double direction = (firstParent.direction + secondParent.direction) / 2;
+        
+        // msm stands for movement speed mean
         double msmAverage = (firstParent.movementSpeedMean + secondParent.movementSpeedMean) / 2;
         double msm = randomizer.nextGaussian() * msmAverage / 10 + msmAverage;
+        
+        // msd stands for movement speed deviation
         double msdAverage = (firstParent.movementSpeedDeviation + secondParent.movementSpeedDeviation) / 2;
         double msd = randomizer.nextGaussian() * msdAverage / 10 + msdAverage;
+        
+        // rsm stands for rotation speed mean
         double rsmAverage = (firstParent.rotationSpeedMean + secondParent.rotationSpeedMean) / 2;
         double rsm = randomizer.nextGaussian() * rsmAverage / 10 + rsmAverage;
+        
+        // rsd stands for rotation speed deviation
         double rsdAverage = (firstParent.rotationSpeedDeviation + secondParent.rotationSpeedDeviation) / 2;
         double rsd = randomizer.nextGaussian() * rsdAverage / 10 + rsdAverage;
+        
         double radiusAverage = (firstParent.radius + secondParent.radius) / 2;
         double radius = randomizer.nextGaussian() * radiusAverage / 10 + radiusAverage;
         
+        // this calculates the energy given to the child by each parent
+        // PARENTS LOSE THAT MUCH ENERGY!!!
         double energyFromFirstParent = firstParent.getEnergyValue() / 2;
         double energyFromSecondParent = secondParent.getEnergyValue() / 2;
         double energy = energyFromFirstParent + energyFromSecondParent;

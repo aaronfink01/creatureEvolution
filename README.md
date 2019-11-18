@@ -14,6 +14,7 @@ What are the goals we want to achieve with this project overall?
    * (Pros: get a grid for free)
    * [Has article about TDD in Greenfoot](https://greenroom.greenfoot.org/files/740/original.pdf)
    * (Cons: Do we want a grid? Or at least 3D space?)
+* [Have Java output charts](https://www.fromdev.com/2012/09/Free-Open-Source-Java-Charting-Library.html)
 
 
 ## Currently Doing

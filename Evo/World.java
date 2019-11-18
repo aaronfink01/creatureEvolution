@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 public class World {
     ArrayList<Agent> agents;
     int frameCount = 0;
+    int saveDataEveryXthFrame = 1000;  // was 100 until nov 2019
+        
     
     /**
      * Constructor for objects of class World
@@ -64,8 +66,12 @@ public class World {
         frameCount++;
     }
     
+    /**
+     * default was to output every 100th frame
+     * now this is variable, perhaps every 1000th for long runs
+     */
     public void outputData() {
-        if(frameCount % 100 == 0) {
+        if(frameCount % saveDataEveryXthFrame == 0) {
             DataHandler.outputData(agents, frameCount);
         }
     }

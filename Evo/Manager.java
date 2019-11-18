@@ -51,6 +51,8 @@ public class Manager extends Application {
         Timer timer = new Timer();
         TimerTask task = new UpdateHandler(this);
         timer.schedule(task, 0, 10);
+        
+        DataHandler.printDataLabels();
     }
     
     public void displayWorld() {

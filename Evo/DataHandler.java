@@ -7,6 +7,10 @@ import java.util.*;
  * @version October 5, 2019
  */
 public class DataHandler {
+    public static void printDataLabels() {
+        System.out.println("Ants (count),Radius (pixels),Mean Movement Speed (pixels per frame),Movement Speed Deviation (pixels per frame),Mean Rotation Speed (radians per frame),Rotation Speed Deviation (radians per frame),Generation,Food (count)");
+    }
+    
     public static void outputData(ArrayList<Agent> agents, int frameCount) {
         // Output Time
         System.out.print(frameCount / 100);

@@ -12,6 +12,7 @@ comment4.params=
 comment4.target=void\ update()
 comment5.params=
 comment5.target=void\ outputData()
+comment5.text=\n\ default\ was\ to\ output\ every\ 100th\ frame\n\ now\ this\ is\ variable,\ perhaps\ every\ 1000th\ for\ long\ runs\n
 comment6.params=antCount
 comment6.target=void\ addRandomAnts(int)
 comment7.params=foodCount

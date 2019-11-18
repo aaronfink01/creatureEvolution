@@ -1,6 +1,8 @@
 #BlueJ class context
 comment0.target=DataHandler
 comment0.text=\n\ Write\ a\ description\ of\ class\ DataHandler\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ October\ 5,\ 2019\n
-comment1.params=agents\ frameCount
-comment1.target=void\ outputData(java.util.ArrayList,\ int)
-numComments=2
+comment1.params=
+comment1.target=void\ printDataLabels()
+comment2.params=agents\ frameCount
+comment2.target=void\ outputData(java.util.ArrayList,\ int)
+numComments=3
