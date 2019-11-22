@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Scientist
+comment0.text=\n\ Write\ a\ description\ of\ class\ Scientist\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ November\ 21,\ 2019\n
+comment1.params=
+comment1.target=Scientist()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Scientist\n
+comment2.params=
+comment2.target=void\ experiment()
+comment3.params=manager
+comment3.target=int\ countAnts(Manager)
+numComments=4

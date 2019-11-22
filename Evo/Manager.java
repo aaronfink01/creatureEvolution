@@ -49,10 +49,26 @@ public class Manager extends Application {
         stage.show();
         
         Timer timer = new Timer();
-        TimerTask task = new UpdateHandler(this);
+        TimerTask task = new UpdateHandler(this, true);
         timer.schedule(task, 0, 10);
         
         DataHandler.printDataLabels();
+    }
+    
+    /**
+     * Run the simulation without taking the time for visuals.
+     * This function has the significant drawback that while it's simulating no other code can execute.
+     * @param framesToSimulate the number of frames of simulation.
+     * Because of how the internal loop works, any negative number will lead to an infinite simulation.
+     */
+    public void startNoVisuals(int framesToSimulate) {
+        UpdateHandler handler = new UpdateHandler(this, false);
+        DataHandler.printDataLabels();
+        int framesSimulated = 0;
+        while(!(framesSimulated == framesToSimulate)) {
+            handler.run();
+            framesSimulated++;
+        }
     }
     
     public void displayWorld() {

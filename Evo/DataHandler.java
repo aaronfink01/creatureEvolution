@@ -8,12 +8,12 @@ import java.util.*;
  */
 public class DataHandler {
     public static void printDataLabels() {
-        System.out.println("Ants (count),Radius (pixels),Mean Movement Speed (pixels per frame),Movement Speed Deviation (pixels per frame),Mean Rotation Speed (radians per frame),Rotation Speed Deviation (radians per frame),Generation,Food (count)");
+        System.out.println("Data Number,Ants (count),Radius (pixels),Mean Movement Speed (pixels per frame),Movement Speed Deviation (pixels per frame),Mean Rotation Speed (radians per frame),Rotation Speed Deviation (radians per frame),Generation,Food (count)");
     }
     
-    public static void outputData(ArrayList<Agent> agents, int frameCount) {
+    public static void outputData(ArrayList<Agent> agents, int frameCount, int saveDataEveryXthFrame) {
         // Output Time
-        System.out.print(frameCount / 100);
+        System.out.print(frameCount / saveDataEveryXthFrame);
         System.out.print(",");
         
         // Calculate Ant Traits

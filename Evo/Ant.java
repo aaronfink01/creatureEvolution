@@ -84,7 +84,13 @@ public class Ant extends Agent {
     }
     
     public boolean readyToReproduce() {
-        return framesSinceReproduction > 500;
+        if(framesSinceReproduction < 500) {
+            return false;
+        }
+        if(energy < maxEnergy * 1 / 3) {
+            return false;
+        }
+        return true;
     }
     
     public void resetFramesSinceReproduction() {

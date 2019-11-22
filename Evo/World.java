@@ -72,7 +72,7 @@ public class World {
      */
     public void outputData() {
         if(frameCount % saveDataEveryXthFrame == 0) {
-            DataHandler.outputData(agents, frameCount);
+            DataHandler.outputData(agents, frameCount, saveDataEveryXthFrame);
         }
     }
     

@@ -8,16 +8,20 @@ import java.util.TimerTask;
  */
 public class UpdateHandler extends TimerTask {
     Manager manager;
+    boolean visualMode = true;
     
     /**
      * Constructor for objects of class UpdateHandler
      */
-    public UpdateHandler(Manager manager) {
+    public UpdateHandler(Manager manager, boolean visualMode) {
         this.manager = manager;
+        this.visualMode = visualMode;
     }
     
     public void run() {
-        manager.displayWorld();
+        if(visualMode) {
+            manager.displayWorld();
+        }
         manager.updateWorld();
         manager.outputData();
     }
