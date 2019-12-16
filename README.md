@@ -15,11 +15,14 @@ What are the goals we want to achieve with this project overall?
    * [Has article about TDD in Greenfoot](https://greenroom.greenfoot.org/files/740/original.pdf)
    * (Cons: Do we want a grid? Or at least 3D space?)
 * [Have Java output charts](https://www.fromdev.com/2012/09/Free-Open-Source-Java-Charting-Library.html)
+* give ctreatures line-of-sight vision
+* give creatures a nose
 
 
 ## Currently Doing
 - [ ] designing tests
 - [ ] writing code
+- [ ] designing a brain
 
 ## Needs to be Done
 
@@ -29,6 +32,10 @@ What are the goals we want to achieve with this project overall?
 
 ## Bug List
 - JavaFX sometimes stops displaying simulation when frame rate is too fast
+
+## Areas of Further Study
+- Would more realistic DNA expression (dominance and recessive etc. vs. averages, multiple factors) help cooler things evolve?
+- Brains ... Language ... Culture? 
 
 
 ## Think About
