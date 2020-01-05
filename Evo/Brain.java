@@ -32,8 +32,21 @@ public class Brain {
         }
     }
     
+    // Propogate inputs forward through the neural network
     public double[] processInputs(double[] inputs) {
-        return new double[0];
+        double[][] values = new double[biases.length + 1][];
+        values[0] = inputs;
+        for(int layer = 1; layer < values.length; layer++) {
+            values[layer] = new double[biases[layer - 1].length];
+            for(int neuron = 0; neuron < values[layer].length; neuron++) {
+                values[layer][neuron] = biases[layer - 1][neuron];
+                for(int previousNeuron = 0; previousNeuron < values[layer - 1].length; previousNeuron++) {
+                    values[layer][neuron] += values[layer - 1][previousNeuron] * weights[layer - 1][previousNeuron][neuron];
+                }
+                values[layer][neuron] = activate(values[layer][neuron]);
+            }
+        }
+        return values[values.length - 1];
     }
     
     // currently uses the logistic function

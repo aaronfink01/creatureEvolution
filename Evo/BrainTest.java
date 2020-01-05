@@ -1,5 +1,3 @@
-
-
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -58,5 +56,19 @@ public class BrainTest {
         assertEquals(testBrain.biases[0][1], -0.2, 0.01);
         assertEquals(testBrain.biases[0][2], 0.1, 0.01);
         assertEquals(testBrain.biases[1][0], -0.6, 0.01);
+    }
+    
+    @Test
+    public void processInputs() {
+        //double[][][] weights = {{{3, 1}, {4, -3}, {-2, -1}}, {{1, 2, 2}, {4, -1, 4}}};
+        double[][][] weights = {{{3, 4, -2}, {1, -3, -1}}, {{1, 4}, {2, -1}, {2, 4}}};
+        double[][] biases = {{2, -1, 3}, {-3, 5}};
+        Brain testBrain = new Brain(weights, biases);
+        
+        double[] inputs = {0.8, -0.3};
+        double[] outputs = testBrain.processInputs(inputs);
+        assertEquals(outputs.length, 2);
+        assertEquals(outputs[0], 0.8304123469, 0.000001);
+        assertEquals(outputs[1], 0.9999883482, 0.000001);
     }
 }
