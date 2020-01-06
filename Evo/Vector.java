@@ -9,10 +9,7 @@ import java.lang.Math;
 public class Vector {
     public double x;
     public double y;
-
-    /**
-     * Constructor for objects of class Vector
-     */
+    
     public Vector(double x, double y) {
         this.x = x;
         this.y = y;

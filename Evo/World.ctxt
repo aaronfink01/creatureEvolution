@@ -17,4 +17,6 @@ comment6.params=antCount
 comment6.target=void\ addRandomAnts(int)
 comment7.params=foodCount
 comment7.target=void\ addRandomFoods(int)
-numComments=8
+comment8.params=turtleCount
+comment8.target=void\ addRandomTurtles(int)
+numComments=9

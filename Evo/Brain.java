@@ -1,3 +1,4 @@
+import java.util.*;
 
 /**
  * Write a description of class Brain here.
@@ -52,5 +53,71 @@ public class Brain {
     // currently uses the logistic function
     public double activate(double value) {
         return 1.0 / (1.0 + Math.exp(-value));
+    }
+    
+    public static Brain initializeRandom(double[][][] weightsDeviation, double[][] biasesDeviation) {
+        Random randomizer = new Random();
+        
+        double[][][] weights = new double[weightsDeviation.length][][];
+        for(int layer = 0; layer < weights.length; layer++) {
+            weights[layer] = new double[weightsDeviation[layer].length][];
+            for(int firstNeuron = 0; firstNeuron < weights[layer].length; firstNeuron++) {
+                weights[layer][firstNeuron] = new double[weightsDeviation[layer][firstNeuron].length];
+                for(int secondNeuron = 0; secondNeuron < weights[layer][firstNeuron].length; secondNeuron++) {
+                    double weight = randomizer.nextGaussian() * weightsDeviation[layer][firstNeuron][secondNeuron];
+                    weights[layer][firstNeuron][secondNeuron] = weight;
+                }
+            }
+        }
+        
+        double[][] biases = new double[biasesDeviation.length][];
+        for(int layer = 0; layer < biases.length; layer++) {
+            biases[layer] = new double[biasesDeviation[layer].length];
+            for(int neuron = 0; neuron < biases[layer].length; neuron++) {
+                double bias = randomizer.nextGaussian() * biasesDeviation[layer][neuron];
+                biases[layer][neuron] = bias;
+            }
+        }
+        
+        return new Brain(weights, biases);
+    }
+    
+    public static Brain simulateReproduction(Brain firstBrain, Brain secondBrain) throws BrainMismatchException {
+        Random randomizer = new Random();
+        
+        double[][][] weights = new double[firstBrain.weights.length][][];
+        for(int layer = 0; layer < weights.length; layer++) {
+            weights[layer] = new double[firstBrain.weights[layer].length][];
+            for(int firstNeuron = 0; firstNeuron < weights[layer].length; firstNeuron++) {
+                weights[layer][firstNeuron] = new double[firstBrain.weights[layer][firstNeuron].length];
+                for(int secondNeuron = 0; secondNeuron < weights[layer][firstNeuron].length; secondNeuron++) {
+                    double average;
+                    try {
+                        average = (firstBrain.weights[layer][firstNeuron][secondNeuron] + secondBrain.weights[layer][firstNeuron][secondNeuron]) / 2;
+                    } catch(ArrayIndexOutOfBoundsException e) {
+                        throw new BrainMismatchException("Two brains of different sizes tried to reproduce.");
+                    }
+                    double weight = randomizer.nextGaussian() * average / 10 + average;
+                    weights[layer][firstNeuron][secondNeuron] = weight;
+                }
+            }
+        }
+        
+        double[][] biases = new double[firstBrain.biases.length][];
+        for(int layer = 0; layer < biases.length; layer++) {
+            biases[layer] = new double[firstBrain.biases[layer].length];
+            for(int neuron = 0; neuron < biases[layer].length; neuron++) {
+                double average;
+                try {
+                    average = (firstBrain.biases[layer][neuron] + secondBrain.biases[layer][neuron]) / 2;
+                } catch(ArrayIndexOutOfBoundsException e) {
+                    throw new BrainMismatchException("Two brains of different sizes tried to reproduce.");
+                }
+                double bias = randomizer.nextGaussian() * average / 10 + average;
+                biases[layer][neuron] = bias;
+            }
+        }
+        
+        return new Brain(weights, biases);
     }
 }

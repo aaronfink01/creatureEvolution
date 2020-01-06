@@ -26,6 +26,7 @@ public class Ant extends Agent {
      * Constructor for objects of class Ant
      */
     public Ant(Vector p, double d, double msm, double msd, double rsm, double rsd, double r, double e, double g) {
+        // position, radius, energy, red, green, blue, generation
         super(p, r, e, 200, 0, 0, g);
         
         this.direction = d;
@@ -188,6 +189,7 @@ public class Ant extends Agent {
         firstParent.reduceEnergy(energyFromFirstParent);
         secondParent.reduceEnergy(energyFromSecondParent);
         
+        // calculate the child's generation
         double firstParentGeneration = firstParent.getGeneration();
         double secondParentGeneration = secondParent.getGeneration();
         double generation = 1 + (firstParentGeneration + secondParentGeneration) / 2;
