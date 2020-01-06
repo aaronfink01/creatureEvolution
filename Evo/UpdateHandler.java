@@ -23,6 +23,6 @@ public class UpdateHandler extends TimerTask {
             manager.displayWorld();
         }
         manager.updateWorld();
-        manager.outputData();
+        //manager.outputData();
     }
 }

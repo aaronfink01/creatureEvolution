@@ -22,7 +22,7 @@ public class World {
         agents = new ArrayList<Agent>();
         //addRandomAnts(10);
         addRandomFoods(50);
-        addRandomTurtles(1);
+        addRandomTurtles(10);
     }
     
     public void display(GraphicsContext gc) {
@@ -112,7 +112,7 @@ public class World {
         // Single hidden layer: 10 neurons
         // Output layer: 2 neurons
         double[][][] weightsDeviation = {{{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}}, {{1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}}};
-        double[][] biasesDeviation = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0}};
+        double[][] biasesDeviation = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1}};
         
         for(int i = 0; i < turtleCount; i++) {
             Turtle newTurtle = Turtle.initializeRandom(weightsDeviation, biasesDeviation);

@@ -17,6 +17,8 @@ public class Turtle extends Agent {
     // Lifetime traits
     public Brain brain;
     
+    public boolean justSawFood = false;
+    
     public Turtle(Vector p, double d, double[][][] w, double[][] b, double e, double g) {
         // position, radius, energy, red, green, blue, generation
         super(p, 15, e, 0, 0, 200, g);
@@ -47,10 +49,14 @@ public class Turtle extends Agent {
     
     public void update(ArrayList<Agent> agents) {
         double[] brainInputs = calculateBrainInputs(agents); // 4: results of vision
+        try {
+            if(whatDoesBrainInputsSee(brainInputs) == Class.forName("Food")) {
+                justSawFood = true;
+            }
+        } catch(ClassNotFoundException e) {
+            System.out.println("The Food class doesn't exist.");
+        }
         double[] brainOutputs = brain.processInputs(brainInputs); // 2: movementSpeed, rotationSpeed
-        System.out.println(brainOutputs[0]);
-        System.out.println(brainOutputs[1]);
-        System.out.println();
         
         move(brainOutputs);
         eat(agents);
@@ -66,7 +72,28 @@ public class Turtle extends Agent {
         framesSinceReproduction++;
     }
     
+    public Class whatDoesBrainInputsSee(double[] brainInputs) {
+        if(brainInputs[0] == 1) {
+            try {
+                return Class.forName("Turtle");
+            } catch(ClassNotFoundException e) {
+                System.out.println("Where did the turtles go?");
+            }
+        } else if(brainInputs[1] == 1) {
+            try {
+                return Class.forName("Food");
+            } catch(ClassNotFoundException e) {
+                System.out.println("Where did the foods go?");
+            }
+        }
+        return null;
+    }
+    
     public double[] calculateBrainInputs(ArrayList<Agent> agents) {
+        // BrainInputs contains three doubles, each ranging from 0 to 1
+        // The first double is 1 if this turtle sees another turtle, 0 otherwise
+        // The second double is 1 if this turtle sees a food, 0 otherwise
+        // The third double is the distance to the thing this turtle sees put through a sigmoid curve
         double[] brainInputs = new double[3]; // turtle?, food?, distance
         Vector rayPosition = position.copy();
         while(true) {
