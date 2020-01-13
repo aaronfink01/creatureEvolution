@@ -10,13 +10,14 @@ What are the pros and cons of each language we might use?
 What are the goals we want to achieve with this project overall?
 
 ## Ideas
-* [Greenfoot](http://www.greenfoot.org) Java critters on a grid 
+* [Greenfoot](http://www.greenfoot.org) Java critters on a grid
    * (Pros: get a grid for free)
    * [Has article about TDD in Greenfoot](https://greenroom.greenfoot.org/files/740/original.pdf)
    * (Cons: Do we want a grid? Or at least 3D space?)
 * [Have Java output charts](https://www.fromdev.com/2012/09/Free-Open-Source-Java-Charting-Library.html)
 * give ctreatures line-of-sight vision
 * give creatures a nose
+* figure out how to make a jar from javaFX project
 
 
 ## Currently Doing
@@ -35,7 +36,7 @@ What are the goals we want to achieve with this project overall?
 
 ## Areas of Further Study
 - Would more realistic DNA expression (dominance and recessive etc. vs. averages, multiple factors) help cooler things evolve?
-- Brains ... Language ... Culture? 
+- Brains ... Language ... Culture?
 
 
 ## Think About

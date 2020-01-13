@@ -42,6 +42,10 @@ public class TurtleTest
     
     @Test
     public void whatDoesBrainInputsSee() {
-        Turtle testTurtle = new Turtle(new Vector(
+        // The two parameters (weightsDeviation and biasesDeviation)
+        // are not necessary for this test. We need to create arrays
+        // for initializeRandom to run, but there values matter not.
+        //double[][][] weightsDeviation(
+        //Turtle testTurtle = Turtle.initializeRandom(0, 0);
     }
 }
