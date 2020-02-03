@@ -17,13 +17,25 @@ public class Scientist {
     }
     
     public void megaExperiment() throws Exception {
-        for(int foodDensity = 1; foodDensity < 50; foodDensity++) {
-            experiment((double)foodDensity);
+        System.out.println("Desnity,Radius");
+        for(int foodSpread = 1; foodSpread < 50; foodSpread++) {
+            experiment((double)foodSpread);
         }
     }
     
-    public void experiment(double foodDensity) throws Exception {
-        Manager manager = new Manager(foodDensity);
+    
+    
+    /*
+     * Because the experiment starts again when either
+     *      1) There is only a single creature left (which cannot mutate further)
+     *      or 2) There are over a hundred creatures (which will slow down the simulation dramatically)
+     * the results of the experiment are inherently biased.
+     * This may be a problem, or maybe not.
+     */
+    public void experiment(double foodSpread) throws Exception {
+        double foodQuantity = 1.0; // Not experimenting with this right now.
+        
+        Manager manager = new Manager(foodSpread, foodQuantity);
         UpdateHandler handler = new UpdateHandler(manager, false);
         //DataHandler.printDataLabels();
         int currentRunFrames = 0;
@@ -32,14 +44,14 @@ public class Scientist {
             currentRunFrames++;
             if(currentRunFrames == 1000000) {
                 double averageAntRadius = averageAntRadius(manager);
-                System.out.println(Integer.toString((int)foodDensity) + "," + Double.toString(averageAntRadius));
+                System.out.println(Integer.toString((int)foodSpread) + "," + Double.toString(averageAntRadius));
                 break;
             } else if(currentRunFrames % 1000 == 0) {
                 //System.out.println(100 * currentRunFrames / 1000000.0);
             }
             int antCount = countAnts(manager);
             if(antCount > 100 || antCount < 2) {
-                manager = new Manager(foodDensity);
+                manager = new Manager(foodSpread, foodQuantity);
                 handler = new UpdateHandler(manager, false);
                 //DataHandler.printDataLabels();
                 currentRunFrames = 0;

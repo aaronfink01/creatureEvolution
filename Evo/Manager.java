@@ -30,9 +30,9 @@ public class Manager extends Application {
         world = new World();
     }
     
-    public Manager(double foodDensity) throws Exception {
+    public Manager(double foodSpread, double foodQuantity) throws Exception {
         super.init();
-        world = new World(foodDensity);
+        world = new World(foodSpread, foodQuantity);
     }
 
     /**

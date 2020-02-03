@@ -13,8 +13,9 @@ public class World {
     ArrayList<Agent> agents;
     int frameCount = 0;
     int saveDataEveryXthFrame = 1000;  // was 100 until nov 2019
-    double foodDensity = 1;
-        
+    double foodSpread = 1; // Doesn't effect the total food value present, but effects how spread out it is across the area.
+    double foodQuantity = 1; // How much energy is added in the form of food.
+    
     public World() {
         agents = new ArrayList<Agent>();
         addRandomAnts(10);
@@ -22,7 +23,10 @@ public class World {
         //addRandomTurtles(10);
     }
     
-    public World(double foodDensity) {
+    public World(double newFoodSpread, double newFoodQuantity) {
+        foodSpread = newFoodSpread;
+        foodQuantity = newFoodQuantity;
+        
         agents = new ArrayList<Agent>();
         addRandomAnts(10);
         addRandomFoods(50);
@@ -65,7 +69,7 @@ public class World {
         
         // Add more food
         if(frameCount % 50 == 0) {
-            addRandomFoods((int)foodDensity);
+            addRandomFoods((int)foodSpread);
         }
         
         frameCount++;
@@ -101,9 +105,13 @@ public class World {
         }
     }
     
+    // foodCount might be taken from foodSpread, or it might be a hardcoded value
+    //     like at the start of the simulation, when exactly 50 foods are always added.
+    // foodSpread both increases the number of foods and decreases the values of foods proportionally,
+    //     to keep total food quantity constant
     public void addRandomFoods(int foodCount) {
-        double evm = 0.1 / foodDensity;
-        double evd = 0.3 / foodDensity;
+        double evm = foodQuantity * 0.1 / foodSpread;
+        double evd = foodQuantity * 0.3 / foodSpread;
         
         for(int i = 0; i < foodCount; i++) {
             Food newFood = Food.initializeRandom(evm, evd);
