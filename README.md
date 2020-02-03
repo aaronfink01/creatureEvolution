@@ -41,3 +41,15 @@ What are the goals we want to achieve with this project overall?
 
 ## Think About
 - https://softwareengineering.stackexchange.com/questions/147480/should-one-check-for-null-if-he-does-not-expect-null
+
+## Notes
+
+Because the experiment starts again when either
+
+     1) There is only a single creature left (which cannot mutate further)
+     
+     or 2) There are over a hundred creatures (which will slow down the simulation dramatically)
+     
+the results of the experiment are inherently biased.
+
+This may be a problem, or maybe not.
