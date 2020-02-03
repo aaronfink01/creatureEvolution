@@ -16,26 +16,33 @@ public class Scientist {
     public Scientist() {
     }
     
+    public void megaExperiment() throws Exception {
+        for(int foodDensity = 1; foodDensity < 50; foodDensity++) {
+            experiment((double)foodDensity);
+        }
+    }
+    
     public void experiment(double foodDensity) throws Exception {
         Manager manager = new Manager(foodDensity);
         UpdateHandler handler = new UpdateHandler(manager, false);
-        DataHandler.printDataLabels();
+        //DataHandler.printDataLabels();
         int currentRunFrames = 0;
         while(true) {
             handler.run();
             currentRunFrames++;
             if(currentRunFrames == 1000000) {
-                System.out.println(averageAntRadius(manager));
+                double averageAntRadius = averageAntRadius(manager);
+                System.out.println(Integer.toString((int)foodDensity) + "," + Double.toString(averageAntRadius));
                 break;
             } else if(currentRunFrames % 1000 == 0) {
-                System.out.println(100 * currentRunFrames / 1000000.0);
+                //System.out.println(100 * currentRunFrames / 1000000.0);
             }
             int antCount = countAnts(manager);
             if(antCount > 100 || antCount < 2) {
                 System.out.print("\u000C");
                 manager = new Manager(foodDensity);
                 handler = new UpdateHandler(manager, false);
-                DataHandler.printDataLabels();
+                //DataHandler.printDataLabels();
                 currentRunFrames = 0;
             }
         }
@@ -63,14 +70,3 @@ public class Scientist {
         return radiusSum / antCount;
     }
 }
-
-/*
-Density   Radius
-1         8.48
-2         4.89
-3         3.68
-4         3.35
-5         9.24
-6         6.18
-7         3.75
- */
