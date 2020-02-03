@@ -29,6 +29,11 @@ public class Manager extends Application {
         super.init();
         world = new World();
     }
+    
+    public Manager(double foodDensity) throws Exception {
+        super.init();
+        world = new World(foodDensity);
+    }
 
     /**
      * The start method is the main entry point for every JavaFX application. 

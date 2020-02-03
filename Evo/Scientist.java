@@ -16,21 +16,24 @@ public class Scientist {
     public Scientist() {
     }
     
-    public void experiment() throws Exception {
-        Manager manager = new Manager();
+    public void experiment(double foodDensity) throws Exception {
+        Manager manager = new Manager(foodDensity);
         UpdateHandler handler = new UpdateHandler(manager, false);
         DataHandler.printDataLabels();
         int currentRunFrames = 0;
         while(true) {
             handler.run();
             currentRunFrames++;
-            if(currentRunFrames == 2000000) {
+            if(currentRunFrames == 1000000) {
+                System.out.println(averageAntRadius(manager));
                 break;
+            } else if(currentRunFrames % 1000 == 0) {
+                System.out.println(100 * currentRunFrames / 1000000.0);
             }
             int antCount = countAnts(manager);
             if(antCount > 100 || antCount < 2) {
                 System.out.print("\u000C");
-                manager = new Manager();
+                manager = new Manager(foodDensity);
                 handler = new UpdateHandler(manager, false);
                 DataHandler.printDataLabels();
                 currentRunFrames = 0;
@@ -47,4 +50,27 @@ public class Scientist {
         }
         return ants;
     }
+    
+    private double averageAntRadius(Manager manager) {
+        double radiusSum = 0;
+        int antCount = 0;
+        for(Agent agent : manager.world.agents) {
+            if(agent instanceof Ant) {
+                radiusSum += agent.radius;
+                antCount++;
+            }
+        }
+        return radiusSum / antCount;
+    }
 }
+
+/*
+Density   Radius
+1         8.48
+2         4.89
+3         3.68
+4         3.35
+5         9.24
+6         6.18
+7         3.75
+ */

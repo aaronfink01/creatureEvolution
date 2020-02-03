@@ -151,7 +151,7 @@ public class Ant extends Agent {
     }
     
     /**
-     * Aaveraging each fixed trait between the two parents AND randomly changing by up to 10%.
+     * Averaging each fixed trait between the two parents AND randomly changing by up to 10%.
      * AND parents lose the energy that they give to their offspring. 
      */
     public static Ant simulateReproduction(Ant firstParent, Ant secondParent) {

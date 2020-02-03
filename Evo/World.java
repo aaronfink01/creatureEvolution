@@ -13,16 +13,20 @@ public class World {
     ArrayList<Agent> agents;
     int frameCount = 0;
     int saveDataEveryXthFrame = 1000;  // was 100 until nov 2019
+    double foodDensity = 1;
         
-    
-    /**
-     * Constructor for objects of class World
-     */
     public World() {
         agents = new ArrayList<Agent>();
-        //addRandomAnts(10);
+        addRandomAnts(10);
         addRandomFoods(50);
-        addRandomTurtles(10);
+        //addRandomTurtles(10);
+    }
+    
+    public World(double foodDensity) {
+        agents = new ArrayList<Agent>();
+        addRandomAnts(10);
+        addRandomFoods(50);
+        //addRandomTurtles(10);
     }
     
     public void display(GraphicsContext gc) {
@@ -61,7 +65,7 @@ public class World {
         
         // Add more food
         if(frameCount % 50 == 0) {
-            addRandomFoods(1);
+            addRandomFoods((int)foodDensity);
         }
         
         frameCount++;
@@ -98,8 +102,8 @@ public class World {
     }
     
     public void addRandomFoods(int foodCount) {
-        double evm = 0.1;
-        double evd = 0.3;
+        double evm = 0.1 / foodDensity;
+        double evd = 0.3 / foodDensity;
         
         for(int i = 0; i < foodCount; i++) {
             Food newFood = Food.initializeRandom(evm, evd);
