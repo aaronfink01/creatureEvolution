@@ -32,6 +32,7 @@ How would introduction predators affect the simulation? Can we reach a multi-spe
 Initial Presentation: https://docs.google.com/presentation/d/1MEo1e8gh9ZiSAboB1UeH3udvDIuOc1QRS0XNVWoFHxo/edit#slide=id.g6e4c618d35_1_7
 
 ## Needs to be Done
+- [ ] Try profiling to see what's taking time.
 
 ## Already Finished
 - [x] Aaron needs to fill out a project sheet for Michelle.
