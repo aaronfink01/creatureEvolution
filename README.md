@@ -1,13 +1,16 @@
 # creatureEvolution
 Aaron's Indy Sci project studying simulated creatures evolving.
+Using Java through BlueJ. (Google Sheets for analysis, JavaFX for visuals.)
 
 ## References
 * [Markdown Reference](https://guides.github.com/features/mastering-markdown/)
 * [Google Talk on PolyWorld](https://www.youtube.com/watch?v=_m97_kL4ox0)
 
 ## Goals / Questions
-What are the pros and cons of each language we might use?
-What are the goals we want to achieve with this project overall?
+How does changing the environment change which traits are favorable?
+  Changing the food spread may have an effect on the final radius of creatures, for example. Maybe it will affect their motion as well.
+  How might changing the total food quantity (over time?) affect creatures' desired traits?
+How would introduction predators affect the simulation? Can we reach a multi-species (dynamic?) equilibrium? 
 
 ## Ideas
 * [Greenfoot](http://www.greenfoot.org) Java critters on a grid
@@ -24,6 +27,9 @@ What are the goals we want to achieve with this project overall?
 - [ ] designing tests
 - [ ] writing code
 - [ ] designing a brain
+
+## Links
+Initial Presentation: https://docs.google.com/presentation/d/1MEo1e8gh9ZiSAboB1UeH3udvDIuOc1QRS0XNVWoFHxo/edit#slide=id.g6e4c618d35_1_7
 
 ## Needs to be Done
 
