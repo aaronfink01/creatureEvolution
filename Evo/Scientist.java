@@ -39,7 +39,6 @@ public class Scientist {
             }
             int antCount = countAnts(manager);
             if(antCount > 100 || antCount < 2) {
-                System.out.print("\u000C");
                 manager = new Manager(foodDensity);
                 handler = new UpdateHandler(manager, false);
                 //DataHandler.printDataLabels();
