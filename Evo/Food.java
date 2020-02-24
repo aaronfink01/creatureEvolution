@@ -20,7 +20,7 @@ public class Food extends Agent {
      * @param evd the size of a standard deviation of energyValue for initiailized foods
      */
     public static Food initializeRandom(double evm, double evd) {
-        Random randomizer = new Random();
+        Random randomizer = Manager.randomizer;
         double x = randomizer.nextDouble() * 590 + 5;
         double y = randomizer.nextDouble() * 590 + 5;
         Vector position = new Vector(x, y);

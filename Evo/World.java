@@ -18,7 +18,7 @@ public class World {
     
     public World() {
         agents = new ArrayList<Agent>();
-        addRandomAnts(10);
+        addRandomTurtles(10);
         addRandomFoods(50);
         //addRandomTurtles(10);
     }

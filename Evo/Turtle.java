@@ -207,7 +207,7 @@ public class Turtle extends Agent {
     }
     
     public static Turtle initializeRandom(double[][][] weightsDeviation, double[][] biasesDeviation) {
-        Random randomizer = new Random();
+        Random randomizer = Manager.randomizer;
         double direction = randomizer.nextDouble() * 360 - 180;
         double x = randomizer.nextDouble() * (600 - 30) + 30;
         double y = randomizer.nextDouble() * (600 - 30) + 30;
@@ -219,7 +219,7 @@ public class Turtle extends Agent {
     public static Turtle simulateReproduction(Turtle firstParent, Turtle secondParent) throws BrainMismatchException {
         Brain brain = Brain.simulateReproduction(firstParent.brain, secondParent.brain);
         
-        Random randomizer = new Random();
+        Random randomizer = Manager.randomizer;
         Vector position = Vector.div(Vector.add(firstParent.position, secondParent.position), 2);
         double direction = (firstParent.direction + secondParent.direction) / 2;
         
