@@ -33,6 +33,7 @@ Initial Presentation: https://docs.google.com/presentation/d/1MEo1e8gh9ZiSAboB1U
 
 ## Needs to be Done
 - [ ] Try profiling to see what's taking time.
+- [ ] Possibly add a flashlight to turtes' eyes.
 
 ## Already Finished
 - [x] Aaron needs to fill out a project sheet for Michelle.
