@@ -52,7 +52,7 @@ public class Brain {
     
     // currently uses the logistic function
     public double activate(double value) {
-        return 1.0 / (1.0 + Math.exp(-value));
+        return 1.0 / (1.0 + Math.exp(-value)) - 0.5;
     }
     
     public static Brain initializeRandom(double[][][] weightsDeviation, double[][] biasesDeviation) {
@@ -119,5 +119,27 @@ public class Brain {
         }
         
         return new Brain(weights, biases);
+    }
+    
+    public void printOut() {
+        System.out.println("Layers: " + Integer.toString(biases.length));
+        System.out.println("Neurons in each layer:");
+        for(int layer = 0; layer < biases.length; layer++) {
+            System.out.println(biases[layer].length);
+        }
+        System.out.println("Weights:");
+        for(int layer = 0; layer < weights.length; layer++) {
+            for(int firstNeuron = 0; firstNeuron < weights[layer].length; firstNeuron++) {
+                for(int secondNeuron = 0; secondNeuron < weights[layer][firstNeuron].length; secondNeuron++) {
+                    System.out.println(weights[layer][firstNeuron][secondNeuron]);
+                }
+            }
+        }
+        System.out.println("Biases:");
+        for(int layer = 0; layer < biases.length; layer++) {
+            for(int neuron = 0; neuron < biases[layer].length; neuron++) {
+                System.out.println(biases[layer][neuron]);
+            }
+        }
     }
 }

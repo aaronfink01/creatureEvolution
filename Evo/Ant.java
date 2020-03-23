@@ -88,7 +88,7 @@ public class Ant extends Agent {
         if(framesSinceReproduction < 500) {
             return false;
         }
-        if(energy < maxEnergy * 1 / 3) {
+        if(energy < maxEnergy * 1.0 / 3.0) {
             return false;
         }
         return true;

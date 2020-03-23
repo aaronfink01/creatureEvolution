@@ -11,4 +11,6 @@ comment4.params=weightsDeviation\ biasesDeviation
 comment4.target=Brain\ initializeRandom(double[][][],\ double[][])
 comment5.params=firstBrain\ secondBrain
 comment5.target=Brain\ simulateReproduction(Brain,\ Brain)
-numComments=6
+comment6.params=
+comment6.target=void\ printOut()
+numComments=7

@@ -36,7 +36,7 @@ public class Scientist {
         double foodQuantity = 1.0; // Not experimenting with this right now.
         
         Manager manager = new Manager(foodSpread, foodQuantity);
-        UpdateHandler handler = new UpdateHandler(manager, false);
+        UpdateHandler handler = new UpdateHandler(manager, false, manager.world.agents);
         //DataHandler.printDataLabels();
         int currentRunFrames = 0;
         while(true) {
@@ -46,13 +46,18 @@ public class Scientist {
                 double averageAntRadius = averageAntRadius(manager);
                 System.out.println(Integer.toString((int)foodSpread) + "," + Double.toString(averageAntRadius));
                 break;
-            } else if(currentRunFrames % 1000 == 0) {
-                //System.out.println(100 * currentRunFrames / 1000000.0);
+            } else if(currentRunFrames % 100000 == 0) {
+                System.out.println(100 * currentRunFrames / 1000000.0);
             }
             int antCount = countAnts(manager);
             if(antCount > 100 || antCount < 2) {
+                if(antCount < 2) {
+                    System.out.println("Too few.");
+                } else {
+                    System.out.println("Too many.");
+                }
                 manager = new Manager(foodSpread, foodQuantity);
-                handler = new UpdateHandler(manager, false);
+                handler = new UpdateHandler(manager, false, manager.world.agents);
                 //DataHandler.printDataLabels();
                 currentRunFrames = 0;
             }
@@ -81,3 +86,11 @@ public class Scientist {
         return radiusSum / antCount;
     }
 }
+
+/*
+ * Density      Radius
+ * 1            3.31
+ * 2
+ * 
+ * 
+ */

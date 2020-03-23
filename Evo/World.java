@@ -18,8 +18,8 @@ public class World {
     
     public World() {
         agents = new ArrayList<Agent>();
-        addRandomAnts(10);
-        addRandomFoods(50);
+        addRandomTurtles(10);
+        addRandomFoods(30);
         //addRandomTurtles(10);
     }
     
@@ -33,9 +33,9 @@ public class World {
         //addRandomTurtles(10);
     }
     
-    public void display(GraphicsContext gc) {
+    public void display(GraphicsContext gc, ArrayList<Agent> agents) {
         for(Agent agent : agents) {
-            agent.display(gc);
+            agent.display(gc, agents);
         }
         
         displayData(gc);
@@ -55,6 +55,8 @@ public class World {
         String generationText = "Generation: " + Double.toString(roundedGeneration);
         gc.setFill(Color.BLACK);
         gc.fillText(generationText, 10, 20);
+        String animalCountText = "Animals: " + Double.toString(animalCount);
+        gc.fillText(animalCountText, 10, 40);
     }
     
     public void update() {
@@ -121,14 +123,15 @@ public class World {
     
     public void addRandomTurtles(int turtleCount) {
         // Input layer: 3 neurons
-        // Single hidden layer: 10 neurons
+        // Single hidden layer: 2 neurons
         // Output layer: 2 neurons
-        double[][][] weightsDeviation = {{{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}}, {{1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}, {1, 1}}};
-        double[][] biasesDeviation = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1}};
+        double[][][] weightsDeviation = {{{1, 1}, {1, 1}, {1, 1}}, {{1, 1}, {1, 1}}};
+        double[][] biasesDeviation = {{0.25, 0.25}, {0.25, 0.25}};
         
         for(int i = 0; i < turtleCount; i++) {
             Turtle newTurtle = Turtle.initializeRandom(weightsDeviation, biasesDeviation);
             agents.add(newTurtle);
+            newTurtle.brain.printOut();
         }
     }
 }

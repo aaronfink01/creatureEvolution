@@ -32,7 +32,7 @@ public class Agent {
     
     public void update(ArrayList<Agent> agents) {}
     
-    public void display(GraphicsContext gc) {
+    public void display(GraphicsContext gc, ArrayList<Agent> agents) {
         gc.setFill(Color.rgb(red, green, blue, Math.max(Math.min(energy, maxEnergy), 0) / maxEnergy));
         gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
     }

@@ -1,4 +1,4 @@
-import java.util.TimerTask; 
+import java.util.*;
 
 /**
  * Write a description of class UpdateHandler here.
@@ -9,18 +9,20 @@ import java.util.TimerTask;
 public class UpdateHandler extends TimerTask {
     Manager manager;
     boolean visualMode = true;
+    ArrayList<Agent> agents;
     
     /**
      * Constructor for objects of class UpdateHandler
      */
-    public UpdateHandler(Manager manager, boolean visualMode) {
+    public UpdateHandler(Manager manager, boolean visualMode, ArrayList<Agent> agents) {
         this.manager = manager;
         this.visualMode = visualMode;
+        this.agents = agents;
     }
     
     public void run() {
         if(visualMode) {
-            manager.displayWorld();
+            manager.displayWorld(agents);
         }
         manager.updateWorld();
         //manager.outputData();

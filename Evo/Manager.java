@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import java.util.Timer; 
 import java.util.TimerTask; 
 import javafx.scene.paint.Color;
+import java.util.*;
 
 /**
  * Write a description of JavaFX class View here.
@@ -54,14 +55,14 @@ public class Manager extends Application {
         stage.show();
         
         Timer timer = new Timer();
-        TimerTask task = new UpdateHandler(this, true);
+        TimerTask task = new UpdateHandler(this, true, world.agents);
         // see   https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html
         // especially  
         // https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html#schedule(java.util.TimerTask,%20long,%20long)
         // all of the method calls expect to be told pause times in milliseconds. grrr.
          // Shedules the UpdateHandler to run frames with a *10* millisecond delay in between.
          // The *0* says the first frame should be run with no delay.
-        timer.schedule(task, 0, 10);
+        timer.schedule(task, 0, 20);
         
         DataHandler.printDataLabels();
     }
@@ -75,7 +76,7 @@ public class Manager extends Application {
      * Because of how the internal loop works, any negative number will lead to an infinite simulation.
      */
     public void startNoVisuals(int framesToSimulate) {
-        UpdateHandler handler = new UpdateHandler(this, false);
+        UpdateHandler handler = new UpdateHandler(this, false, world.agents);
         DataHandler.printDataLabels();
         int framesSimulated = 0;
         while(!(framesSimulated == framesToSimulate)) {
@@ -93,7 +94,7 @@ public class Manager extends Application {
      * Because of how the internal loop works, any negative number will lead to an infinite simulation.
      */
     public void startNoVisualsThreaded(int framesToSimulate) throws InterruptedException {
-        UpdateHandler handler = new UpdateHandler(this, false);
+        UpdateHandler handler = new UpdateHandler(this, false, world.agents);
         DataHandler.printDataLabels();
         int framesSimulated = 0;
         while(!(framesSimulated == framesToSimulate)) {
@@ -108,10 +109,10 @@ public class Manager extends Application {
         }
     }
     
-    public void displayWorld() {
+    public void displayWorld(ArrayList<Agent> agents) {
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        world.display(gc);
+        world.display(gc, agents);
     }
     
     public void updateWorld() {

@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=UpdateHandler
 comment0.text=\n\ Write\ a\ description\ of\ class\ UpdateHandler\ here.\n\n\ @author\ Aaron\ Fink\n\ @version\ September\ 26,\ 2019\n
-comment1.params=manager\ visualMode
-comment1.target=UpdateHandler(Manager,\ boolean)
+comment1.params=manager\ visualMode\ agents
+comment1.target=UpdateHandler(Manager,\ boolean,\ java.util.ArrayList)
 comment1.text=\n\ Constructor\ for\ objects\ of\ class\ UpdateHandler\n
 comment2.params=
 comment2.target=void\ run()
