@@ -25,13 +25,43 @@ public class Manager extends Application {
     World world;
     GraphicsContext gc;
     Canvas canvas;
-    
+
+    /** BEWARE: Using multiple threads will cause the order that random numbers are accessed to
+     * be unpredictable, which will make the random seed not guarantee fixed results.
+     */
+    public static Random randomizer;
+    long randomSeed = 0; // The same seed will get the same simulation result every time we run.
+    /** If this is true, we are NOT being random. We are getting fixed results. */
+    boolean useRandomSeed = true; // If this is true, we are NOT being random.
+    // We are getting fixed results. 
+
+    /**
+     * JavaFX calls this constructor when we press "Run JavaFX Application" in BlueJ.
+     * (probably because it is the default.)
+     * We have no idea how to run this thing from Terminal.
+     */
     public Manager() throws Exception {
+        randomizer = new Random();
+        if (useRandomSeed) {
+            randomizer.setSeed(randomSeed);
+        }
         super.init();
         world = new World();
     }
-    
+
+    /** 
+     * We only manually create a Manager (using BlueJ interface)
+     * when we want to run without visuals. At which point we call one of these
+     * Manager constructors.
+     * 
+     * This constructor is not called from anywhere in our code.
+     * JavaFX calls the other constructor (above).
+     */
     public Manager(double foodSpread, double foodQuantity) throws Exception {
+        randomizer = new Random();
+        if(useRandomSeed) {
+            randomizer.setSeed(randomSeed);
+        }
         super.init();
         world = new World(foodSpread, foodQuantity);
     }
@@ -53,7 +83,7 @@ public class Manager extends Application {
         stage.setScene(scene);
         stage.setTitle("Evolution Simulator");
         stage.show();
-        
+
         Timer timer = new Timer();
         TimerTask task = new UpdateHandler(this, true, world.agents);
         // see   https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html
@@ -66,14 +96,16 @@ public class Manager extends Application {
         
         DataHandler.printDataLabels();
     }
-    
+
     /**
      * Run the simulation without taking the time for visuals.
-     * This function has the significant drawback that while it's simulating no other code can execute.
+     * This function has the significant drawback that while it
+     * is simulating no other code can execute.
      * (What other code would want to execute anyway? We don't have a GUI do we?)
      * See startNoVisualsThreaded( ) below
      * @param framesToSimulate the number of frames of simulation.
-     * Because of how the internal loop works, any negative number will lead to an infinite simulation.
+     * Because of how the internal loop works, any negative number will 
+     * lead to an infinite simulation.
      */
     public void startNoVisuals(int framesToSimulate) {
         UpdateHandler handler = new UpdateHandler(this, false, world.agents);
@@ -84,14 +116,20 @@ public class Manager extends Application {
             framesSimulated++;
         }
     }
-    
-    
+
     /**
      * Run the simulation without taking the time for visuals.
-     * This function has the significant improvement that while it's simulating other code can execute.
-     * See startNoVisuals( ) above which has busy loop (fast but greedy re threads (what other threads???))
+     * This function has the significant improvement that 
+     * while it is simulating, other code can execute.
+     * See startNoVisuals( ) above which has busy loop 
+     * (fast but greedy re threads (what other threads???))
+     * 
      * @param framesToSimulate the number of frames of simulation.
-     * Because of how the internal loop works, any negative number will lead to an infinite simulation.
+     * Because of how the internal loop works, any negative number 
+     * will lead to an infinite simulation.
+     * 
+     * BEWARE: Using multiple threads will cause the order that random numbers are accessed to
+     * be unpredictable, which will make the random seed not guarantee fixed results.
      */
     public void startNoVisualsThreaded(int framesToSimulate) throws InterruptedException {
         UpdateHandler handler = new UpdateHandler(this, false, world.agents);
@@ -114,11 +152,11 @@ public class Manager extends Application {
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         world.display(gc, agents);
     }
-    
+
     public void updateWorld() {
         world.update();
     }
-    
+
     public void outputData() {
         world.outputData();
     }

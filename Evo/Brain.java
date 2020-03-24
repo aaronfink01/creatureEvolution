@@ -56,7 +56,7 @@ public class Brain {
     }
     
     public static Brain initializeRandom(double[][][] weightsDeviation, double[][] biasesDeviation) {
-        Random randomizer = new Random();
+        Random randomizer = Manager.randomizer;
         
         double[][][] weights = new double[weightsDeviation.length][][];
         for(int layer = 0; layer < weights.length; layer++) {
@@ -83,7 +83,7 @@ public class Brain {
     }
     
     public static Brain simulateReproduction(Brain firstBrain, Brain secondBrain) throws BrainMismatchException {
-        Random randomizer = new Random();
+        Random randomizer = Manager.randomizer;
         
         double[][][] weights = new double[firstBrain.weights.length][][];
         for(int layer = 0; layer < weights.length; layer++) {

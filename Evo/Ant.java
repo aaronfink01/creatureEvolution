@@ -18,9 +18,6 @@ public class Ant extends Agent {
     public double movementSpeedDeviation;
     public double rotationSpeedMean;
     public double rotationSpeedDeviation;
-    
-    // Utilities
-    public Random randomizer;
 
     /**
      * Constructor for objects of class Ant
@@ -35,7 +32,6 @@ public class Ant extends Agent {
         this.movementSpeedDeviation = msd;
         this.rotationSpeedMean = rsm;
         this.rotationSpeedDeviation = rsd;
-        randomizer = new Random();
     }
     
     public void update(ArrayList<Agent> agents) {
@@ -50,6 +46,7 @@ public class Ant extends Agent {
     }
     
     public void move() {
+        Random randomizer = Manager.randomizer;
         double movement = randomizer.nextGaussian() * movementSpeedDeviation + movementSpeedMean;
         double rotation = randomizer.nextGaussian() * rotationSpeedDeviation + rotationSpeedMean;
         Vector motion = new Vector(movement, 0.0).rotate(direction);
@@ -137,7 +134,7 @@ public class Ant extends Agent {
      * @param rd the size of a standard deviation of radius for initialized ants
      */
     public static Ant initializeRandom(double msmm, double msmd, double msdm, double msdd, double rsmm, double rsmd, double rsdm, double rsdd, double rm, double rd)  {
-        Random randomizer = new Random();
+        Random randomizer = Manager.randomizer;
         double direction = randomizer.nextDouble() * 360 - 180;
         double msm = randomizer.nextGaussian() * msmd + msmm;
         double msd = randomizer.nextGaussian() * msdd + msdm;
@@ -158,7 +155,7 @@ public class Ant extends Agent {
         firstParent.resetFramesSinceReproduction();
         secondParent.resetFramesSinceReproduction();
         
-        Random randomizer = new Random();
+        Random randomizer = Manager.randomizer;
         Vector position = Vector.div(Vector.add(firstParent.position, secondParent.position), 2);
         double direction = (firstParent.direction + secondParent.direction) / 2;
         
