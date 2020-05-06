@@ -14,13 +14,17 @@ public class World {
     int frameCount = 0;
     int saveDataEveryXthFrame = 1000;  // was 100 until nov 2019
     double foodSpread = 1; // Doesn't effect the total food value present, but effects how spread out it is across the area.
-    double foodQuantity = 1; // How much energy is added in the form of food.
+    double foodQuantity = 5; // How much energy is added in the form of food.
+    boolean turtleMode = true; // otherwise, use ants instead
     
     public World() {
         agents = new ArrayList<Agent>();
-        addRandomTurtles(10);
         addRandomFoods(30);
-        //addRandomTurtles(10);
+        if(turtleMode) {
+            addRandomTurtles(7);
+        } else {
+            addRandomAnts(10);
+        }
     }
     
     public World(double newFoodSpread, double newFoodQuantity) {
@@ -28,9 +32,12 @@ public class World {
         foodQuantity = newFoodQuantity;
         
         agents = new ArrayList<Agent>();
-        addRandomAnts(10);
-        addRandomFoods(50);
-        //addRandomTurtles(10);
+        //addRandomFoods(50);
+        if(turtleMode) {
+            addRandomTurtles(7);
+        } else {
+            addRandomAnts(10);
+        }
     }
     
     public void display(GraphicsContext gc, ArrayList<Agent> agents) {
@@ -55,7 +62,7 @@ public class World {
         String generationText = "Generation: " + Double.toString(roundedGeneration);
         gc.setFill(Color.BLACK);
         gc.fillText(generationText, 10, 20);
-        String animalCountText = "Animals: " + Double.toString(animalCount);
+        String animalCountText = "Creatures: " + Double.toString(animalCount);
         gc.fillText(animalCountText, 10, 40);
     }
     
@@ -125,8 +132,8 @@ public class World {
         // Input layer: 3 neurons
         // Single hidden layer: 2 neurons
         // Output layer: 2 neurons
-        double[][][] weightsDeviation = {{{1, 1}, {1, 1}, {1, 1}}, {{1, 1}, {1, 1}}};
-        double[][] biasesDeviation = {{0.25, 0.25}, {0.25, 0.25}};
+        double[][][] weightsDeviation = {{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}}, {{1, 1}, {1, 1}, {1, 1}}};
+        double[][] biasesDeviation = {{0.25, 0.25, 0.25}, {0.25, 0.25}};
         
         for(int i = 0; i < turtleCount; i++) {
             Turtle newTurtle = Turtle.initializeRandom(weightsDeviation, biasesDeviation);

@@ -20,6 +20,10 @@ public class Turtle extends Agent {
     public boolean justSawFood = false;
     public ArrayList<Turtle> children = new ArrayList<Turtle>();
     
+    static public boolean visualAid = true;
+    public int framesAlive = 0;
+    public int foodsEaten = 0;
+    
     public Turtle(Vector p, double d, double[][][] w, double[][] b, double e, double g) {
         // position, radius, energy, red, green, blue, generation
         super(p, 15, e, 0, 0, 200, g);
@@ -41,14 +45,14 @@ public class Turtle extends Agent {
     
     public void display(GraphicsContext gc, ArrayList<Agent> agents) {
         double[] brainInputs = calculateBrainInputs(agents);
-        displayVision(gc, brainInputs);
-        if(brainInputs[1] == 1) {
-            gc.setFill(Color.rgb(255, 0, 0, Math.max(Math.min(energy, maxEnergy), 0) / maxEnergy));
-            gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
-        } else {
-            gc.setFill(Color.rgb(0, 0, 200, Math.max(Math.min(energy, maxEnergy), 0) / maxEnergy));
-            gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
+        if(Turtle.visualAid) {
+            displayVision(gc, brainInputs);
         }
+        gc.setFill(Color.rgb(0, 0, 200, Math.max(Math.min(energy, maxEnergy), 0) / maxEnergy));
+        if(brainInputs[1] == 1 && visualAid) {
+            gc.setFill(Color.rgb(255, 0, 0, Math.max(Math.min(energy, maxEnergy), 0) / maxEnergy));
+        }
+        gc.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
         gc.save();
         gc.translate(position.x, position.y);
         gc.rotate(direction);
@@ -64,6 +68,7 @@ public class Turtle extends Agent {
     }
     
     public void update(ArrayList<Agent> agents) {
+        framesAlive++;
         double[] brainInputs = calculateBrainInputs(agents); // 4: results of vision
         //System.out.println(Double.toString(brainInputs[0]) + ", " + Double.toString(brainInputs[1]) + ", " + Double.toString(brainInputs[2]));
         try {
@@ -75,9 +80,9 @@ public class Turtle extends Agent {
         }
         double[] brainOutputs = brain.processInputs(brainInputs); // 2: movementSpeed, rotationSpeed
         if (brainInputs[1] == 1) {
-            System.out.println("I see food!");
+            // System.out.println("I see food!");
         }
-        System.out.println(Double.toString(Math.round(brainOutputs[0] * 100.0) / 100.0) + ", " + Double.toString(Math.round(brainOutputs[1] * 100.0) / 100.0));
+        // System.out.println(Double.toString(Math.round(brainOutputs[0] * 100.0) / 100.0) + ", " + Double.toString(Math.round(brainOutputs[1] * 100.0) / 100.0));
         
         move(brainOutputs);
         eat(agents);
@@ -151,7 +156,12 @@ public class Turtle extends Agent {
     }
     
     public void move(double[] brainOutputs) {
-        Vector movement = new Vector(5 * (brainOutputs[0] + 0.5), 0).rotate(direction);
+        if(brainOutputs[0] < -1) {
+            System.out.println("Uh oh");
+            System.out.println(brainOutputs[0]);
+            System.out.println("**********");
+        }
+        Vector movement = new Vector(2.5 * (brainOutputs[0] + 1), 0).rotate(direction * 0.5);
         position.add(movement);
         constrainToScreen();
         
@@ -166,6 +176,7 @@ public class Turtle extends Agent {
             if(agent instanceof Food) {
                 Food food = (Food)agent;
                 if(food.overlap(position, radius)) {
+                    foodsEaten++;
                     energy += food.getEnergyValue();
                     food.setEaten();
                 }

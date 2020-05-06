@@ -50,9 +50,9 @@ public class Brain {
         return values[values.length - 1];
     }
     
-    // currently uses the logistic function
+    // currently uses the tanh function
     public double activate(double value) {
-        return 1.0 / (1.0 + Math.exp(-value)) - 0.5;
+        return 2.0 / (1.0 + Math.exp(-2 * value)) - 1;
     }
     
     public static Brain initializeRandom(double[][][] weightsDeviation, double[][] biasesDeviation) {

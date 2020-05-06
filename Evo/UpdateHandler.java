@@ -26,5 +26,18 @@ public class UpdateHandler extends TimerTask {
         }
         manager.updateWorld();
         //manager.outputData();
+        
+        /*
+        float average = 0;
+        float count = 0;
+        for(Agent agent : manager.world.agents) {
+            if(agent instanceof Turtle) {
+                count++;
+                average += ((float)((Turtle)agent).foodsEaten) / ((float)((Turtle)agent).framesAlive);
+            }
+        }
+        average /= count;
+        System.out.println(average);
+        */
     }
 }

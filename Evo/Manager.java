@@ -30,9 +30,9 @@ public class Manager extends Application {
      * be unpredictable, which will make the random seed not guarantee fixed results.
      */
     public static Random randomizer;
-    long randomSeed = 0; // The same seed will get the same simulation result every time we run.
+    long randomSeed = 2; // The same seed will get the same simulation result every time we run.
     /** If this is true, we are NOT being random. We are getting fixed results. */
-    boolean useRandomSeed = true; // If this is true, we are NOT being random.
+    boolean useRandomSeed = false; // If this is true, we are NOT being random.
     // We are getting fixed results. 
 
     /**

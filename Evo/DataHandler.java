@@ -25,6 +25,10 @@ public class DataHandler {
         double rotationSpeedDeviation = 0;
         double generation = 0;
         
+        // Calculate Turtle Traits
+        int turtleCount = 0;
+        
+        
         for(Agent agent : agents) {
             if(agent instanceof Ant) {
                 antCount++;
